@@ -1,4 +1,4 @@
 class Grade < ActiveRecord::Base
-    has_one :assignment, foreign_key: 'assignment'
-    has_one :user, foreign_key: 'student'
+    belongs_to :assignment, foreign_key: 'assignment'
+    belongs_to :user, foreign_key: 'student'
 end    
