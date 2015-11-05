@@ -19,6 +19,13 @@ $(document).ready(function(){
             document.getElementById("errors").innerHTML = "ERROR: Incorrect Validation Code </br>"
             flag = 1;
         }
+
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        if(!re.test($('#signup_email').val())) {
+            document.getElementById("errors").innerHTML = "ERROR: Invalid Email Address </br>"
+            flag = 1;
+        }
+
         if(flag == 0) {
             this.submit();
         }
