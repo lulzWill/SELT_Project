@@ -1,0 +1,14 @@
+<h1>Iowa Student Service</h1>
+<br>
+<%= form_tag("login") do %>
+    <%= label_tag(:username, "Please enter your username")%>
+    <br>
+    <%= text_field_tag(:username)%>
+    <br>
+    <%= label_tag(:password, "Please enter your password")%>
+    <br>
+    <%= password_field_tag(:password)%>
+    <br>
+    <%= submit_tag("Login") %>
+    <%= button_to "Signup", new_user_path %>
+<% end %>
