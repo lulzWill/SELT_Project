@@ -30,4 +30,8 @@ describe SessionsController do
         expect(response).to redirect_to("/user/index.html.haml")
        end
     end
+    describe 'logging out' do
+        it 'should end session and redirect to login page' do
+        end
+    end
 end

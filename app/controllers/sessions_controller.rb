@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         check = user && user.authenticate(session_params[:password]) 
         if check
             cookies.permanent[:session_token]= user.session_token
-            #redirect_to "/user/index.html.haml"
+            redirect_to "/user/show.html.haml"
         else
             flash[:notice] = "Invalid User-ID/Password combination"
             redirect_to login_path
