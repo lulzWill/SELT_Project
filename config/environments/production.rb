@@ -34,6 +34,12 @@ Rails.application.configure do
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
+  
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: 'key-efc58ee2eb49eb21279aeb4c136879fe',
+    domain: 'sandboxc829c8844d654e0eb289ee94cca7b026.mailgun.org'
+}
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
