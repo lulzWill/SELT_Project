@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         if(!User.find_by_user_id(params[:user][:user_id]))
             @user = User.new(user_params)
             if @user.save
-                flash[:notice] = "You have successfully signed up as a #{@user.role}"
+                flash[:notice] = "You have successfully signed up as a #{params[:user][:role]}"
                 redirect_to login_path
             else
                 flash[:notice] = "Sorry, something went wrong. Please try again"
