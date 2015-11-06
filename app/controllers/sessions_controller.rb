@@ -10,10 +10,10 @@ class SessionsController < ApplicationController
     
     def create
         user = User.find_by_user_id(session_params[:user_id])
-
-        if user && user.authenticate(session_params[:password])
+        check = user && user.authenticate(session_params[:password]) 
+        if check
             cookies.permanent[:session_token]= user.session_token
-            redirect_to "/user/show.html.haml"
+            #redirect_to "/user/index.html.haml"
         else
             flash[:notice] = "Invalid User-ID/Password combination"
             redirect_to login_path
