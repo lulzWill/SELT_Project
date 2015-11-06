@@ -24,8 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 gem 'bcrypt'
-gem 'culerity'
-gem 'celerity', :require => nil # JRuby only. Make it available but don't require it in any environment.
+gem 'selenium-webdriver'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

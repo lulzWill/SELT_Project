@@ -14,6 +14,10 @@ $(document).ready(function(){
             document.getElementById("errors").innerHTML += "ERROR: Passwords do not match </br>"
             flag = 1;
         }
+        if (pass.length < 6 || pass.length > 12) {
+            document.getElementById("errors").innerHTML += "ERROR: Password is of invalid length (Must be between 6 and 12 characters) </br>"
+            flag = 1;
+        }
         if($('#user_role').val() == "Teacher" && $('#signup_validate').val() != "teach me please") {
             document.getElementById("errors").innerHTML += "ERROR: Incorrect Validation Code </br>"
             flag = 1;
