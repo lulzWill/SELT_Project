@@ -7,8 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<h1>SELT_Project</h1>
+  <div id="main">
+    <% if flash[:notice] %>
+      <div class="message" id="notice">
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:warning] %>
+      <div class="message" id="warning">
+        <%= flash[:warning] %>
+      </div>
+    <% end %>
+    <% if @current_user %>
+      <p>You are logged in as #{@current_user.email} (User name: #{@current_user.name})</p>
+      <%= button_to 'Log Out', logout_path, :method => 'delete' %>
+    <% end %>
+    <%= yield %>
+  </div>
 </body>
 </html>

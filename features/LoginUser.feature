@@ -9,7 +9,7 @@ Feature: Allow users to login_path
     Then I should be logged in as the "Teacher" with User-Id "teacher"
     
   Scenario: Login as an Admin
-    When I have entered User-Id "admin" and password "admin" 
+    When I have entered User-Id "admin" and password "admin1" 
     Then I should be logged in as "Admin" with User-Id "admin"
     
   Scenario: Invalid Login

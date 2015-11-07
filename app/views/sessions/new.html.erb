@@ -1,9 +1,8 @@
 <h1>Login</h1>
-<%= form_tag login_create_path do %>
-  <%= label :user, :user_id, 'User-ID:' %>
-  <%= text_field :user, 'user_id', :id=> "login_id" %>
-  <%= label :user, :password, 'Password:' %>
-  <%= password_field :user, 'password', :id=> "login_password" %>
-  <%= button_to "Log in", login_create_path, :id=> "login_submit" %>
-  <%= link_to "Sign-up for an account", new_user_path, :id=> "signup" %>
+<%= form_tag sessions_path, :method => 'post' do %>
+  <%= label :session, :user_id, 'User-Id' %>
+  <%= text_field :session, 'user_id' %>
+  <%= label :session, :password, 'Password' %>
+  <%= password_field :session, 'password' %>
+  <%= submit_tag 'Log in' %>
 <% end %>

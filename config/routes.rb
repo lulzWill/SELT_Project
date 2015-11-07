@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/profile', to: 'users#show', via: :get
   match '/login', to: 'sessions#new', via: :get
-  match '/login_create', to: 'sessions#create', via: :post
   match '/logout', to: 'sessions#destroy', via: :delete
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :users
   # Example resource route with options:
   #   resources :products do
   #     member do
@@ -57,5 +56,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  resources :users
 end

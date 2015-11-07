@@ -1,19 +1,18 @@
 class SessionsController < ApplicationController
+    skip_before_filter :set_current_user
     
-    def session_params
-        params.require(:user).permit(:user_id, :password, :session_token)
-    end
-  
     def new
         # default, display new.html
     end
     
     def create
-        user = User.find_by_user_id(session_params[:user_id])
-        check = user && user.authenticate(session_params[:password]) 
+        user = User.find_by_user_id(params[:session][:user_id])
+        check = user && user.authenticate(params[:session][:password]) 
         if check
-            cookies.permanent[:session_token]= user.session_token
-            redirect_to "/user/show.html.haml"
+            flash[:notice] = "Logged in as #{params[:session][:user_id]}"
+            cookies.permanent[:session_token]=user.session_token
+            redirect_to "users/#{params[:session][:id]}"
+            #redirect_to profile_path
         else
             flash[:notice] = "Invalid User-ID/Password combination"
             redirect_to login_path
