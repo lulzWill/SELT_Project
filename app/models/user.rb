@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
     has_secure_password
-    before_create :create_session_token
+    before_save :create_session_token
     validates :password, presence: true, length: {minimum: 6, maximum: 12}
     
     #def self.create_user! (hsh)
@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
     #end
     private
     def create_session_token
-       self.session_token = SecureRandom.base64 
+       self.session_token = SecureRandom.urlsafe_base64 
     end
 end

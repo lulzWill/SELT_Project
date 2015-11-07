@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<h1>SELT_Project</h1>
+  <h1 class="title"></h1>SELT_Project</h1>
   <div id="main">
     <% if flash[:notice] %>
       <div class="message" id="notice">
@@ -19,8 +19,11 @@
       </div>
     <% end %>
     <% if @current_user %>
-      <p>You are logged in as #{@current_user.email} (User name: #{@current_user.name})</p>
+      <p>You are logged in as <%= @current_user.user_id %><p>
       <%= button_to 'Log Out', logout_path, :method => 'delete' %>
+      <p class="profile">
+        <%= link_to 'View Profile',user_path(@current_user)  %>
+      </p>
     <% end %>
     <%= yield %>
   </div>

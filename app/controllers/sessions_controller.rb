@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
         user = User.find_by_user_id(params[:session][:user_id])
         check = user && user.authenticate(params[:session][:password]) 
         if check
-            flash[:notice] = "Logged in as #{params[:session][:user_id]}"
+            #flash[:notice] = "Logged in as #{params[:session][:user_id]}"
             cookies.permanent[:session_token]=user.session_token
-            redirect_to "users/#{params[:session][:id]}"
+            redirect_to courses_path
             #redirect_to profile_path
         else
             flash[:notice] = "Invalid User-ID/Password combination"
