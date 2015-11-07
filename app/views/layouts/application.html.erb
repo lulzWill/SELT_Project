@@ -19,7 +19,7 @@
       </div>
     <% end %>
     <% if @current_user %>
-      <p>You are logged in as <%= @current_user.user_id %><p>
+      <p>You are logged in as <%= @current_user.role %> <%= @current_user.user_id %><p>
       <%= button_to 'Log Out', logout_path, :method => 'delete' %>
       <p class="profile">
         <%= link_to 'View Profile',user_path(@current_user)  %>
