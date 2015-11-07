@@ -1,14 +1,14 @@
 <h1>Iowa Student Service</h1>
 <br>
-<%= form_tag("login") do %>
+<%= form_tag sessions_path, :method => 'post' do %>
     <%= label_tag(:username, "Please enter your username")%>
     <br>
-    <%= text_field_tag(:username)%>
+    <%= text_field :session, 'user_id', :id => 'user_id' %>
     <br>
     <%= label_tag(:password, "Please enter your password")%>
     <br>
-    <%= password_field_tag(:password)%>
+    <%= password_field :session, 'password', :id => 'password' %>
     <br>
     <%= submit_tag("Login") %>
-    <%= button_to "Signup", new_user_path %>
+    <%= link_to '<button type="button">Signup</button>'.html_safe, new_user_path %>
 <% end %>

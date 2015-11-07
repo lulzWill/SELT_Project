@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107014457) do
+ActiveRecord::Schema.define(version: 20151107014407) do
 
   create_table "assignments", force: :cascade do |t|
     t.string   "name"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20151107014457) do
     t.string   "session_token"
   end
 
-  add_index "users", ["session_token"], name: "index_users_on_session_token"
   add_index "users", ["user_id"], name: "index_users_on_user_id", unique: true
 
 end
