@@ -18,7 +18,7 @@ class UsersController < ApplicationController
             params_hash = {:email => params[:user][:email], :user_id => params[:user][:user_id], :role => params[:user][:role], :password => params[:user][:password]} 
             @user = User.new(params_hash)
             if @user.save
-                #UserMailer.welcome_email(@user).deliver
+                UserMailer.welcome_email(@user).deliver_now
                 flash[:notice] = "You have successfully signed up as a #{params[:user][:role]}"
                 redirect_to login_path
             else
