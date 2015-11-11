@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('#optionalfields').hide();
-        
+    $('#errors').hide();
+    
     $('#signup_form').on('submit', function(e){
         e.preventDefault();
         
@@ -35,6 +36,8 @@ $(document).ready(function(){
 
         if(flag == 0) {
             this.submit();
+        } else {
+            $('#errors').show();
         }
     });
     
