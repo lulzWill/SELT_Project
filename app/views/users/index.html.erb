@@ -1,14 +1,27 @@
-<h1>Iowa Student Service</h1>
-<br>
-<%= form_tag sessions_path, :method => 'post' do %>
-    <%= label_tag(:username, "Please enter your username")%>
-    <br>
-    <%= text_field :session, 'user_id', :id => 'user_id' %>
-    <br>
-    <%= label_tag(:password, "Please enter your password")%>
-    <br>
-    <%= password_field :session, 'password', :id => 'password' %>
-    <br>
-    <%= submit_tag("Login") %>
-    <%= link_to '<button type="button">Signup</button>'.html_safe, new_user_path %>
-<% end %>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-9">
+            <div class="panel panel-default" style="width: 60%;">
+                <div class="panel-body" style="margin-left: 20%;">
+                    <h1>Iowa Student Service</h1>
+                    <div style="margin-left: 13%">
+                        <%= form_tag sessions_path, :method => 'post' do %>
+                            <%= label_tag(:username, "Username:")%>
+                            <br>
+                            <%= text_field :session, 'user_id', :id => 'user_id' %>
+                            <br>
+                            <%= label_tag(:password, "Password:")%>
+                            <br>
+                            <%= password_field :session, 'password', :id => 'password' %>
+                            <br>
+                            <%= submit_tag("Login") %>
+                            <%= link_to '<button type="button">Signup</button>'.html_safe, new_user_path %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
