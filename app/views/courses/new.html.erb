@@ -1,0 +1,8 @@
+h1 Create New Course
+<%= form_tag courses_path do %>
+  <%= label :course, :name, 'Name' %>
+  <%= text_field :course, 'name' %>
+  <%= label :course, :course_number, 'Course Number' %>
+  <%= text_field :course_number, 'course_number' %>
+  <%= submit_tag 'Save Changes' %>
+<% end %>

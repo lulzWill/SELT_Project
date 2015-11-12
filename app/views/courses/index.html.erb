@@ -1,0 +1,24 @@
+<h1>All Courses</h1>
+<table id="courses">
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Course Number</th>
+      <th>More Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @course.each do |course| %>
+        <td>
+            <%= course.name %>
+        </td>
+        <td>
+            <%= course.course_number %>
+        </td>
+        <td>
+          <%= link_to "More about #{course.name}", courses_path(course) %>
+        </td>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Add new Course', new_courses_path %>

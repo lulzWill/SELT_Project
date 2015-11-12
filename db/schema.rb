@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20151107014407) do
     t.string   "name"
     t.string   "year_restrictions"
     t.string   "course_number"
+    t.text     "descrition"
+    t.integer  "semester_hours"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
