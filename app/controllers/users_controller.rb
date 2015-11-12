@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     
     def new
         if logged_in?
+            flash[:notice]="You are already logged in"
             redirect_to courses_path
         end
     #render new template

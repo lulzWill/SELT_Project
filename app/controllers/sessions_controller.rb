@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
     
     def new
         if logged_in?
+            flash[:notice]="You are already logged in"
             redirect_to courses_path
         end
         # default, display new.html
