@@ -2,6 +2,9 @@ class SessionsController < ApplicationController
     skip_before_filter :set_current_user
     
     def new
+        if logged_in?
+            redirect_to courses_path
+        end
         # default, display new.html
     end
     
@@ -11,10 +14,11 @@ class SessionsController < ApplicationController
         if check
             #flash[:notice] = "Logged in as #{params[:session][:user_id]}"
             cookies.permanent[:session_token]=user.session_token
+            flash[:notice] = "You have successfully logged in as #{params[:session][:user_id]}"
             redirect_to courses_path
             #redirect_to profile_path
         else
-            flash[:notice] = "Invalid User-ID/Password combination"
+            flash[:warning] = "Invalid User-ID/Password combination"
             redirect_to login_path
         end
     end

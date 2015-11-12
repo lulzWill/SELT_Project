@@ -10,5 +10,13 @@ class ApplicationController < ActionController::Base
 
   def current_user?(id)
     @current_user.id.to_s == id
-  end  
+  end
+  
+  def logged_in?
+    if User.find_by_session_token(cookies[:session_token])
+      return true
+    else
+      return false
+    end
+  end
 end
