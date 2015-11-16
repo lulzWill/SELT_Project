@@ -19,11 +19,11 @@ $(document).ready(function(){
             document.getElementById("errors").innerHTML += "ERROR: Password is of invalid length (Must be between 6 and 12 characters) </br>"
             flag = 1;
         }
-        if($('#user_role').val() == "Teacher" && $('#signup_validate').val() != "teach me please") {
+        if($('#user_role').val() == "Teacher" && $('#signup_validate').val() != "teachercode") {
             document.getElementById("errors").innerHTML += "ERROR: Incorrect Validation Code </br>"
             flag = 1;
         }
-        if($('#user_role').val() == "Admin" && $('#signup_validate').val() != "pimpin aint easy") {
+        if($('#user_role').val() == "Admin" && $('#signup_validate').val() != "admincode") {
             document.getElementById("errors").innerHTML += "ERROR: Incorrect Validation Code </br>"
             flag = 1;
         }

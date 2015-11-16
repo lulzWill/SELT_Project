@@ -1,13 +1,16 @@
 Feature: Allow a user to sign up for the website
   
-Scenario: Sign up studnet
+@javascript
+Scenario: Sign up student
   When I have successfully signed up as a "Student"
   Then I should be shown "Student" confirmation on the homepage
   
-Scenario: Sign up Professor
+@javascript
+Scenario: Sign up Teacher
   When I have successfully signed up as a "Teacher"
   Then I should be shown "Teacher" confirmation on the homepage
 
+@javascript
 Scenario: Sign up Admin
   When I have successfully signed up as a "Admin"
   Then I should be shown "Admin" confirmation on the homepage
