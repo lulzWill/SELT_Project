@@ -8,17 +8,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @course.each do |course| %>
+    <% @courses.each do |course| %>
+      <tr>
         <td>
-            <%= course.name %>
+          <%= course.name  %>
         </td>
         <td>
-            <%= course.course_number %>
+          <%= course.course_number %>
         </td>
         <td>
-          <%= link_to "More about #{course.name}", courses_path(course) %>
+          <%= link_to "More about #{course.name}", course_path(course) %>
         </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Add new Course', new_courses_path %>
+<%= link_to 'Add new course', new_course_path %>

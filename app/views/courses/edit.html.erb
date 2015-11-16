@@ -1,5 +1,5 @@
-<h1>Create New Course</h1>
-<%= form_tag courses_path do %>
+<h1>Edit Course</h1>
+<%= form_tag course_path(@course), :method => :put do %>
   <%= label :course, :name, 'Name: ' %>
   <%= text_field :course, 'name' %>
   <br>
@@ -9,11 +9,11 @@
   <%= label :course, :year_restrictions, 'Year Restrictions: ' %>
   <%= text_field :year_restrictions, 'year_restrictions' %>
   <br>
-  <%= label :course, :descrition, 'Description of Course: ' %>
-  <%= text_field :descrition, 'descrition'%>
+  <%= label :course, :descrition, 'Description: ' %>
+  <%= text_field :descrition, 'descrition' %>
   <br>
-  <%= label :course, :semester_hours, 'Number of Semester Hours: ' %>
+  <%= label :course, :semester_hours, 'Semester Hours: ' %>
   <%= text_field :semester_hours, 'semester_hours' %>
   <br>
-  <%= submit_tag 'Save Course' %>
+  <%= submit_tag 'Update Course Info' %>
 <% end %>
