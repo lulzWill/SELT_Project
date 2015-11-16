@@ -59,6 +59,12 @@ When /^I am logged in "(.*?)" and click on link in navbar$/ do |id|
   fill_in 'user_id', :with => 'student'
   fill_in 'password', :with => 'student'
   click_button 'Log in'
+  click_button 'Log Out'
+  #fill_in 'user_id', :with => 'student'
+  #fill_in 'password', :with => 'student'
+  fill_in 'user_id_nav', :with => id
+  fill_in 'password_nav', :with => id
+  click_button 'Login'
   click_link 'profile'
 end
 
