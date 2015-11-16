@@ -1,16 +1,24 @@
 class UsersController < ApplicationController
     
     before_filter :set_current_user, :only=> ['show', 'edit', 'update', 'delete']
+    
     def user_params
      params.require(:user).permit(:email, :user_id, :role, :password)
     end
     
     def new
+        if logged_in?
+            flash[:notice]="You are already logged in"
+            redirect_to courses_path
+        end
     #render new template
     end
     
     def show
-        @user = User.find(params[:id])
+        @user=@current_user
+		if !current_user?(params[:id])	
+		    flash[:warning]='Can only show profile of logged-in	user'	
+		end	
     end
     
     def create
