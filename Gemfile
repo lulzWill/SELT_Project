@@ -31,6 +31,7 @@ gem 'autoprefixer-rails'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'factory_girl_rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
