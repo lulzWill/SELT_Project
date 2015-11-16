@@ -19,3 +19,11 @@ courses.each do |course|
     Course.create!(course)
 end
 
+users = [{:user_id => 'Student', :email => 'student@email.com', :password => 'password', :role => 'Student', :year => 'freshman'},
+            {:user_id => 'Professor', :email => 'prof@email.com', :password => 'password', :role => 'Professor', :year => ' '},
+            {:user_id => 'Admin', :email => 'admin@email.com', :password => 'password', :role => 'Admin', :year => ' '}]
+            
+users.each do |user|
+    User.create!(user)
+end
+

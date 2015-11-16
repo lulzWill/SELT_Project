@@ -21,6 +21,10 @@ class UsersController < ApplicationController
 		end	
     end
     
+    def index
+        @current_user = User.find_by_session_token(cookies[:session_token])
+    end
+    
     def create
         if(!User.find_by_user_id(params[:user][:user_id]))
             params_hash = {:email => params[:user][:email], :user_id => params[:user][:user_id], :role => params[:user][:role], :password => params[:user][:password]} 
@@ -40,10 +44,11 @@ class UsersController < ApplicationController
     end
     
     def admin_home 
-        #render page
+        @current_user = User.find_by_session_token(cookies[:session_token])
     end
     
     def admin_view_professors
+        @current_user = User.find_by_session_token(cookies[:session_token])
         if @current_user.role == "Admin"
             @professors = User.where(:role => "Professor")
         else
@@ -53,6 +58,7 @@ class UsersController < ApplicationController
     end
     
     def view_students
+        @current_user = User.find_by_session_token(cookies[:session_token])
         if @current_user.role == "Professor"
            @students = nil
         elsif @current_user.role == "Admin"
@@ -64,10 +70,11 @@ class UsersController < ApplicationController
     end
     
     def home
-        @user = User.find_by_session_token(cookies[:session_token])
-        
+        @current_user = User.find_by_session_token(cookies[:session_token])
+        if @current_user.role == "Admin"
+            redirect_to admin_home_path
+        end
         @courses = Course.all
-        @studens = User.all
     end
     
     #def promote_TA
