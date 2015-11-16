@@ -16,11 +16,22 @@ Scenario: Login as a Teacher
   When I have entered UserId "teacher" and password "teacher"
   Then I should be logged in as "teacher"
     
-Scenario: Login as a Admin
+Scenario: Login as an Admin
   When I have entered UserId "admin" and password "admin1" 
   Then I should be logged in as "admin"
     
-Scenario: Invalid Login
+Scenario: Invalid Login and Password
   When I have entered UserId "doesnot" and password ""
   Then I should be redirected to login path
-    
+  
+Scenario: Valid Id/Invalid Password
+  When I have entered UserId "admin" and password "not a password"
+  Then I should be redirected to login path
+  
+Scenario: Valid Password/Invalid Id
+  When I have entered UserId "notanadminid" and password "admin1"
+  Then I should be redirected to login path
+  
+Scenario: Valid Password and ID but for different users
+  When I have entered UserId "admin" and password "student"
+  Then I should be redirected to login path
