@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
     before_filter :set_current_user
     
     def course_params
-        params.require(:course).permit(:name, :description, :course_number, :semester_hours)    
+        params.require(:course).permit(:name, :year_restrictions, :descrition, :course_number, :semester_hours)    
     end
     
     def new
@@ -28,7 +28,7 @@ class CoursesController < ApplicationController
         @course = Course.find(params[:id])
         @course.destroy
         flash[:notice] = "#{@course.name} was successfully deleted."
-        redirect_to course_path
+        redirect_to courses_path
     end
     
     def edit

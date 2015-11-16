@@ -16,12 +16,12 @@ class SessionsController < ApplicationController
                 redirect_to courses_path 
             end
             
-            if user.role == 'student'
+            if user.role == 'Student'
                 redirect_to login_path
             end    
             #redirect_to profile_path
             
-            if user.role == 'professor'
+            if user.role == 'Teacher'
                redirect_to login_path
             end    
         else
