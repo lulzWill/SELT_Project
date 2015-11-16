@@ -11,8 +11,11 @@ class SessionsController < ApplicationController
         if check
             #flash[:notice] = "Logged in as #{params[:session][:user_id]}"
             cookies.permanent[:session_token]=user.session_token
-            redirect_to courses_path
-            #redirect_to profile_path
+            if user.role == "Admin"
+                redirect_to admine_home_path
+            else
+                redirect_to home_path
+            end
         else
             flash[:notice] = "Invalid User-ID/Password combination"
             redirect_to login_path

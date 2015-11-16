@@ -1,0 +1,21 @@
+<h1>Student Information</h1>
+
+<p>Name:  <%student.name%></p>
+<br>
+<p>Email: <%student.email%></p>
+<br>
+<p>User ID: <%student.user_id%></p>
+<br>
+<p>Year: <%student.year%></p>
+<br>
+<%if student.ta == "false"%>
+<%= button_to "Promote to TA", :action => "promote_TA" %>
+<% else %>
+<%= button_to "Demote TA", :action => "demote_TA" %>
+<% end %>
+
+
+
+
+
+<% link_to "#{.name}", user_path(professor)%>

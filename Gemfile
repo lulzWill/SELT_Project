@@ -26,6 +26,9 @@ gem 'selenium-webdriver'
 gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun'
 gem 'mailgun_rails'
 
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 

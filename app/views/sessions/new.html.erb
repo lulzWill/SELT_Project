@@ -2,7 +2,9 @@
 <%= form_tag sessions_path, :method => 'post' do %>
   <%= label :session, :user_id, 'User-Id' %>
   <%= text_field :session, 'user_id', :id => 'user_id' %>
+  <br>
   <%= label :session, :password, 'Password' %>
   <%= password_field :session, 'password', :id => 'password' %>
+  <br>
   <%= submit_tag 'Log in', :id => 'login' %>
 <% end %>

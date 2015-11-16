@@ -1,0 +1,6 @@
+<h1>Professors</h1>
+
+<% for professor in @professors%>
+<% link_to "#{professor.name}", user_path(professor)%>
+<br>
+<% end %>
