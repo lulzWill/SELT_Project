@@ -1,28 +1,32 @@
-%h1 Sign-Up
 = javascript_include_tag 'signup_scripts'
-
-= form_tag users_path, :id => 'signup_form' do
-
-  = label :user, :user_id, 'User-ID'
-  = text_field :user, 'user_id', :id => 'signup_id'
-  %br
-  = label :user, :email, 'Email'
-  = text_field :user, 'email', :id => 'signup_email'
-  %br
-  = label :user, :password, 'Password'
-  = password_field :user, 'password', :id => 'signup_pass'
-  %br
-  = label :user, :password_conf, 'Confirm Password'
-  = password_field :user, 'password_conf', :id => 'signup_pass_conf'
-  %br
-  = label :user, :role, 'Role'
-  = select :user, :role, ['Student','Teacher','Admin'], :id => 'signup_role'
-  
-  #optionalfields
-    %br
-    = label :user, :validation_code, 'Validation Code'
-    = password_field :user, 'validation_code', :id => 'signup_validate'
-  %br
-  = submit_tag 'Create My Account', :id => 'signup_submit'
-  
-#errors
+%div.container
+  %div.row
+    %div.panel.panel-default
+      %div.panel-body{:style => 'height: 40%;'}
+        %div.col-sm-6
+          %h1 Sign-Up
+          = form_tag users_path, :id => 'signup_form' do
+            %div.form-group.row
+              = label :user, :user_id, 'User-ID', :class => 'col-sm-2'
+              = text_field :user, 'user_id', :id => 'signup_id', :class => 'col-sm-9'
+            %div.form-group.row
+              = label :user, :email, 'Email', :class => 'col-sm-2'
+              = text_field :user, 'email', :id => 'signup_email', :class => 'col-sm-9'
+            %div.form-group.row
+              = label :user, :password, 'Password', :class => 'col-sm-2'
+              = password_field :user, 'password', :id => 'signup_pass', :class => 'col-sm-9'
+            %div.form-group.row
+              = label :user, :password_conf, 'Confirm Password', :class => 'col-sm-2'
+              = password_field :user, 'password_conf', :id => 'signup_pass_conf', :class => 'col-sm-9'
+            %div.form-group.row
+              = label :user, :role, 'Role', :class => 'col-sm-2'
+              = select :user, :role, ['Student','Teacher','Admin'], :id => 'signup_role', :class => 'col-sm-9'
+            #optionalfields
+              %div.form-group.row
+                = label :user, :validation_code, 'Validation Code', :class => 'col-sm-2'
+                = password_field :user, 'validation_code', :id => 'signup_validate', :class => 'col-sm-9'
+            = submit_tag 'Create My Account', :id => 'signup_submit'
+        %div.col-sm-6
+          = image_tag("iss_icon.png", class: "img-responsive", height: '250', width: '250', style: "margin-left: 30%; margin-top: 5%;")
+        %br
+      #errors.alert.alert-danger

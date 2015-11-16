@@ -7,9 +7,9 @@ When /^I have successfully signed up as a "(.*?)"$/ do |position|
   select position, :from => 'user_role'
   
   if position.eql? "Teacher" 
-    fill_in 'signup_validate', :with => "teach me please"
+    fill_in 'signup_validate', :with => "teachercode"
   elsif position.eql? "Admin"
-    fill_in 'signup_validate', :with => "pimpin aint easy"
+    fill_in 'signup_validate', :with => "admincode"
   end
   
   select position, :from => 'user_role'
