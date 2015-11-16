@@ -62,14 +62,14 @@ class UsersController < ApplicationController
         @studens = User.all
     end
     
-    def promote_TA
-        User.update!(params[:id], :ta => true)
-        redirect_to view_students_path
-    end
+    #def promote_TA
+    #    User.update!(params[:id], :ta => true)
+    #    redirect_to view_students_path
+    #end
     
-    def demote_TA
-        User.update!(params[:id], :ta => false)
-        redirect_to view_students_path
-    end
+    #def demote_TA
+    #    User.update!(params[:id], :ta => false)
+    #    redirect_to view_students_path
+    #end
     
 end
