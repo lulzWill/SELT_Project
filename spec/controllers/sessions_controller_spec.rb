@@ -58,4 +58,14 @@ describe SessionsController do
           expect(flash[:warning]).to eq "Invalid User-ID/Password combination" 
        end
     end
+    
+    describe 'already logged in' do
+        it 'redirect to courses and flash notice' do
+            user = FactoryGirl.create(:user)
+            post :create, {:session => {:user_id => 'admin', :password => 'admin1'}}
+            get :new
+            expect(flash[:notice]).to eq "You are already logged in"
+            expect(response).to redirect_to(courses_path)
+        end
+    end
 end
