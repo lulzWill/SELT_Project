@@ -1,7 +1,7 @@
-<%if(@course && @current_user)%>
+<%if($course && $current_user)%>
     <div class ="container-fluid">
         <h1>Assignments</h1>
-        <%if(@current_user.role == "Teacher")%>
+        <%if($current_user.role == "Teacher")%>
             <table class="table table-striped .table-responsive" >
                 <thead>
                     <tr>
@@ -9,12 +9,13 @@
                         <th>Total</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% if(@assignments != nil) %>
+                    <% if($assignments != nil) %>
                     
-                        <% @assignments.each do |assignment|%>
+                        <% $assignments.each do |assignment|%>
                             <tr>
                                 <td><%=assignment.name%></td>
                                 <% if(assignment.points == nil) %>
@@ -22,7 +23,8 @@
                                 <%else%>
                                     <td><%=assignment.points%></td>
                                 <%end%>
-                                <td><%= button_to 'Edit Assignment'%></td>
+                                <td><button type="button" data-id = "<%=assignment.id%>" class= "editAssign" data-toggle="modal" data-target="#myModal">Edit Assignment</button></td>
+                                <td><%= button_to 'Delete Assignment', deleteAssignment_path(:assignmentID => assignment.id), method: :post%></td>
                                 <td><%= button_to 'View Grades'%></td>
                             </tr>
                         <% end %>
@@ -35,14 +37,43 @@
                     <% end%>
                     <tr>
                         <%= form_tag(assignments_home_path) do %>
-                            <td><%= text_field_tag(:name)%></td>
-                            <td><%= number_field_tag(:points)%></td>
-                            <td><%= submit_tag("Create Assignment")%></td>
+                            <td id= "createName"><%= text_field_tag(:name)%></td>
+                            <td id= "createPoints"><%= number_field_tag(:points)%></td>
+                            <td id= "createButton"><%= submit_tag("Create Assignment")%></td>
                         <% end %>
+                            <td></td>
                             <td></td>
                     </tr>
                 </tbody>
             </table>
+            <%= content_tag :div, class: "temp_information", data: {temp: @temp} do %>
+            <% end %>
+            <%= form_tag(updateAssignment_path(:assignmentID => @temp)) do %>
+                <div id="myModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editing Assignment</h4>
+                      </div>
+                      <div class="modal-body">
+                        <%= @temp.inspect %>
+                        <%= label :name, 'Name'%>
+                        <%= text_field_tag(:name)%>
+                        <%= label :points, 'Total'%>
+                        <%= number_field_tag(:points)%>
+                      </div>
+                      <div class="modal-footer">
+                        <%= submit_tag("Save")%>
+                        <button type="button" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                
+                  </div>
+                </div>
+            <% end %>
         <%end%>
     </div>
 <%end%>

@@ -30,7 +30,7 @@ class Assignment < ActiveRecord::Base
     end
 
     def self.validAssignment(assignmentID)
-        if(Course.exists?(assignmentID))
+        if(Assignment.exists?(assignmentID))
             return true
         else
             return false

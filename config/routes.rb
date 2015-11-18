@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   match '/view_students', to: 'users#view_students', via: :get
   match '/assignments_home', to: 'assignments#assignments_home', via: :get
   match '/assignments_home', to: 'assignments#createAssignment', via: :post
-  #match '/createAssignment', to: 'assignments#createAssignment', via: :post
-  #match '/updateAssignment', to: 'assignments#updateAssignment', via: :post
+  match '/deleteAssignment', to: 'assignments#deleteAssignment', via: :post
+  match '/updateAssignment', to: 'assignments#updateAssignment', via: :post
   resources :events
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
