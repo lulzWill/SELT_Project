@@ -1,0 +1,23 @@
+<h2>Details about #{@course.name}</h2>
+<ul id="details">
+  <li>
+    Course Number:
+    <%= @course.course_number %>
+  </li>
+  
+  <li>
+    Semester Hours:  
+    <%= @course.semester_hours %>  
+  </li> 
+  
+  <li>
+    Year Restrictions:  
+    <%= @course.year_restrictions %>  
+  </li>   
+</ul>
+<h3>Description:</h3>
+<p id="description">
+  <%= @course.description %>
+</p>
+<%= link_to 'Edit Course', edit_course_path(@course) %>
+<%= link_to 'Back to Course List',  courses_path %>

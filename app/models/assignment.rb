@@ -1,3 +1,4 @@
 class Assignment < ActiveRecord::Base
-    belongs_to :course, foreign_key: 'course'
+    belongs_to :course
+    belongs_to :user
 end    

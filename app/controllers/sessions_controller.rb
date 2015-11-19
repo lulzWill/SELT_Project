@@ -2,19 +2,27 @@ class SessionsController < ApplicationController
     skip_before_filter :set_current_user
     
     def new
+        if logged_in?
+            flash[:notice]="You are already logged in"
+            redirect_to courses_path
+        end
         # default, display new.html
     end
     
     def create
         user = User.find_by_user_id(params[:session][:user_id])
-        check = user && user.authenticate(params[:session][:password]) 
+        check = user && user.authenticate(params[:session][:password])
         if check
             #flash[:notice] = "Logged in as #{params[:session][:user_id]}"
             cookies.permanent[:session_token]=user.session_token
-            redirect_to courses_path
-            #redirect_to profile_path
+            if user.role == "Admin"
+                redirect_to admin_home_path
+            else
+                redirect_to home_path
+            end
+            flash[:notice] = "You have successfully logged in as #{params[:session][:user_id]}"
         else
-            flash[:notice] = "Invalid User-ID/Password combination"
+            flash[:warning] = "Invalid User-ID/Password combination"
             redirect_to login_path
         end
     end

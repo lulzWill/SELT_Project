@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   match '/login', to: 'sessions#new', via: :get
   match '/logout', to: 'sessions#destroy', via: :delete
+  match '/home', to: 'users#home', via: :get
+  match '/admin_home', to: 'users#admin_home', via: :get
+  match '/view_students', to: 'users#view_students', via: :get
+  resources :events
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
