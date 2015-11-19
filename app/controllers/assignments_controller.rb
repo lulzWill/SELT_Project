@@ -1,15 +1,17 @@
 class AssignmentsController < ApplicationController
+    before_filter :set_current_user, :only=> ['show', 'edit', 'update', 'delete']
     #when professor assignments page renders
     def assignments_home
-        $current_user = User.find_by_session_token(cookies[:session_token])
+        @current_user = User.find_by_session_token(cookies[:session_token])
+        $course = nil
         #$course = Course.find(params[:courseId])
         $course = Course.find(1)
         $assignments = Assignment.where("course_id = ?", $course.id)
         
-        if(!$current_user)
+        if(!@current_user)
             flash[:notice] = "You need to be logged in to see this page"
         end
-        if(!$course)
+        if(!$course || $course == [])
             flash[:notice] = "Please select a class to see this page"
         end
     end
@@ -17,7 +19,8 @@ class AssignmentsController < ApplicationController
     #for creating a new assignments
     def createAssignment
         redirect_to assignments_home_path
-        if($current_user.role == "Teacher")
+        @current_user = User.find_by_session_token(cookies[:session_token])
+        if(@current_user.role == "Teacher")
             result = Assignment.createAssignment($course.id, params[:name], params[:points])
             if(result.is_a? String)
                 flash[:warning] = result
@@ -30,7 +33,8 @@ class AssignmentsController < ApplicationController
     end
     
     def updateAssignment
-        if($current_user.role == "Teacher")
+        @current_user = User.find_by_session_token(cookies[:session_token])
+        if(@current_user.role == "Teacher")
             result = Assignment.updateAssignment(params[:assignmentID].to_i, params[:name], params[:points])
             if(result.is_a? String)
                 flash[:warning] = result
@@ -44,7 +48,8 @@ class AssignmentsController < ApplicationController
     end
     
     def deleteAssignment
-        if($current_user.role == "Teacher")
+        @current_user = User.find_by_session_token(cookies[:session_token])
+        if(@current_user.role == "Teacher")
             if(params[:assignmentID] == nil)
             end
             if(Assignment.exists?(params[:assignmentID]))

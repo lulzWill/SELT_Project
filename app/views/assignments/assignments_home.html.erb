@@ -1,7 +1,8 @@
-<%if($course != nil && $current_user !=nil)%>
+<%if($course != nil && @current_user !=nil)%>
     <div class ="container-fluid">
-        <h1>Assignments</h1>
-        <%if($current_user.role == "Teacher")%>
+        <h1><%=link_to "#{$course.name}", course_path($course.id), method: :get %></h1>
+        <h3>Assignments</h3>
+        <%if(@current_user.role == "Teacher")%>
             <table class="table table-striped .table-responsive" >
                 <thead>
                     <tr>
@@ -13,8 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% if($assignments != nil) %>
-                    
+                    <% if($assignments != nil && $assignments != []) %>
                         <% $assignments.each do |assignment|%>
                             <tr class = "<%=assignment.id%>">
                                 <td><%=assignment.name%></td>
@@ -31,6 +31,7 @@
                     <% else %>
                         <tr>
                             <td>No Assignments</td>
+                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>
