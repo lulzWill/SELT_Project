@@ -21,7 +21,7 @@ class Assignment < ActiveRecord::Base
         if(!self.validName(name))
             return "Unable to update assignment. The name entered was not valid"
         end
-        points = self.validePoints(points)
+        points = self.validPoints(points)
         assignment = self.find(assignmentID)
         assignment.name = name
         assignment.points = points
