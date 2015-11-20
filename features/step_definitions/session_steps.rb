@@ -69,5 +69,5 @@ When /^I am logged in "(.*?)" and click on link in navbar$/ do |id|
 end
 
 Then /^I should be redirected to "(.*?)" profile$/ do |id|
-  expect(current_url).to match(user_path(id))
+  expect(current_url).to match(home_path)
 end

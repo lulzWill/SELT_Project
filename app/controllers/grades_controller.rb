@@ -17,7 +17,7 @@ class GradesController < ApplicationController
             redirect_to "/#{params[:course_id]}/#{params[:assignment_id]}/grades"
         else
             flash[:notice] = "Assignment does not exist!"
-            redirect_to course_path
+            redirect_to home_path
         end
     end
     
@@ -27,8 +27,8 @@ class GradesController < ApplicationController
     
     def index
         if(!Assignment.find(params[:assignment_id]))
-            flash[:message] = "Assignment does not exist!"
-            redirect_to assignments_home_path
+            flash[:notice] = "Assignment does not exist!"
+            redirect_to home_path
         else
             @assignment = Assignment.find(params[:assignment_id])
             @course = Course.find(@assignment.course_id)
@@ -36,7 +36,7 @@ class GradesController < ApplicationController
             
             @userlist = Array.new
             @course.users.each do |user|
-                @userlist << user.user_id
+            @userlist << user.user_id
             end
         end
     end
