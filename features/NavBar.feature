@@ -10,15 +10,15 @@ Background: users in the user table
   
   Scenario: Click on homepage link, send to login
     When I have not logged in
-    Then redirect to login_path
+    Then redirect to new_user_path
     
   Scenario: Click on homepage link, send to courses
     When I am logged in 
-    Then redirect to courses_path
+    Then redirect to home_path
     
   Scenario: Click on logout button when logged in
     When I click on logout button when logged in
-    Then redirect to login_path and display logout message
+    Then redirect to new_user_path and display logout message
     
   Scenario: Click on user id link and go to user profile
     When I am logged in "student" and click on link in navbar

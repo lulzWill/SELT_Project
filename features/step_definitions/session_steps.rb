@@ -16,17 +16,17 @@ Then /^I should be logged in as "(.*?)"$/ do |id|
     #expect(current_url).to match(courses_path)
 end
     
-Then /^I should be redirected to login path$/ do
-    expect(current_url).to match(login_path)
+Then /^I should be redirected to signup path$/ do
+    expect(current_url).to match(new_user_path)
 end
 
 When /^I have not logged in$/ do
-    visit login_path
+    visit new_user_path
     click_link 'SELT_Project'
 end
 
-Then /^redirect to login_path$/ do
-    expect(current_url).to match(login_path)
+Then /^redirect to new_user_path$/ do
+    expect(current_url).to match(new_user_path)
 end
 
 When /^I am logged in$/ do 
@@ -37,8 +37,8 @@ When /^I am logged in$/ do
   click_link 'SELT_Project'
 end
 
-Then /^redirect to courses_path$/ do
-  expect(current_url).to match(courses_path)
+Then /^redirect to home_path$/ do
+  expect(current_url).to match(home_path)
 end
 
 When /^I click on logout button when logged in$/ do
@@ -49,8 +49,8 @@ When /^I click on logout button when logged in$/ do
   click_button 'Log Out'
 end
 
-Then /^redirect to login_path and display logout message$/ do
-  expect(current_url).to match(login_path)
+Then /^redirect to new_user_path and display logout message$/ do
+  expect(current_url).to match(new_user_path)
   expect(page.text).to match(/You have logged out/)
 end
 

@@ -22,16 +22,16 @@ Scenario: Login as an Admin
     
 Scenario: Invalid Login and Password
   When I have entered UserId "doesnot" and password ""
-  Then I should be redirected to login path
+  Then I should be redirected to signup path
   
 Scenario: Valid Id/Invalid Password
   When I have entered UserId "admin" and password "not a password"
-  Then I should be redirected to login path
+  Then I should be redirected to signup path
   
 Scenario: Valid Password/Invalid Id
   When I have entered UserId "notanadminid" and password "admin1"
-  Then I should be redirected to login path
+  Then I should be redirected to signup path
   
 Scenario: Valid Password and ID but for different users
   When I have entered UserId "admin" and password "student"
-  Then I should be redirected to login path
+  Then I should be redirected to signup path

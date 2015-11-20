@@ -65,7 +65,7 @@ describe SessionsController do
             post :create, {:session => {:user_id => 'admin', :password => 'admin1'}}
             get :new
             expect(flash[:notice]).to eq "You are already logged in"
-            expect(response).to redirect_to(courses_path)
+            expect(response).to redirect_to(home_path)
         end
     end
 end

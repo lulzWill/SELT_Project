@@ -71,10 +71,14 @@ class UsersController < ApplicationController
     
     def home
         @current_user = User.find_by_session_token(cookies[:session_token])
-        if @current_user.role == "Admin"
-            redirect_to admin_home_path
+        if(@current_user)
+            if @current_user.role == "Admin"
+                redirect_to admin_home_path
+            end
+            @courses = Course.all
+        else
+            redirect_to new_user_path
         end
-        @courses = Course.all
     end
     
     #def promote_TA

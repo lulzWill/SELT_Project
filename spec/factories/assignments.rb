@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :assignment do
-    id 1
+    #id 1
     course_id 1
     name "Assignment1"
     points 10
