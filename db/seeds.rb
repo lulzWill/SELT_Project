@@ -6,7 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-<<<<<<< HEAD
 courses = [{:name => 'Philosophy', :year_restrictions => 'freshman', :course_number => "1"},
             {:name => 'Calculus', :year_restrictions => 'freshman', :course_number => "2"},
             {:name => 'Anatomy', :year_restrictions => 'freshman', :course_number => "3"},

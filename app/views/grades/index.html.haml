@@ -1,0 +1,14 @@
+%h2= "Details about " + @course.name
+
+%table#grades
+  %thead
+    %tr
+      %th Student Id
+      %th Points Received
+      %th Potential Points
+  %tbody
+    - @grades.each do |user, points|
+      %tr
+        %td= user 
+        %td= points
+        %td= @assignment.points

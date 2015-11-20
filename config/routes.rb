@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   match '/admin_home', to: 'users#admin_home', via: :get
   match '/view_students', to: 'users#view_students', via: :get
   resources :events
+  match '/:course_id/:assignment_id/grades', to: 'grades#index', via: :get
+  match '/:course_id/:assignment_id/grades/add', to: 'grades#create', via: :post
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

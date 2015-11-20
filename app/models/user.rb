@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
     has_many :courses
-    has_many :assignments, :through => :courses
+    has_many :assignment, :through => :courses
     
     has_secure_password
     before_save :create_session_token
-    validates :password, presence: true, length: {minimum: 6, maximum: 12}
+    #validates :password, presence: true, length: {minimum: 6, maximum: 12}
     
     #def self.create_user! (hsh)
     #   hsh[:session_token] = SecureRandom.base64
