@@ -5,5 +5,5 @@ class Course < ActiveRecord::Base
    validates :name, :presence => true, :uniqueness => true
    validates :year_restrictions, :presence => true
    validates :course_number, :presence => true, :uniqueness => true 
-   validates :description, :presence => true
+   
 end    
