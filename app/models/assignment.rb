@@ -1,4 +1,4 @@
 class Assignment < ActiveRecord::Base
-    belongs_to :course
-    belongs_to :user
+    belongs_to :courses
+    serialize :grades, Hash
 end    
