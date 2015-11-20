@@ -36,7 +36,7 @@ describe 'Assignment' do
            expect(Assignment.validPoints(50) == 50).to be true
         end
         it "should return 0 if it was a string" do
-           expect(Assignment.validPoints('50') == 0).to be true
+           expect(Assignment.validPoints('50') == 50).to be true
         end
         it "should return 0 if the points were invalid" do
            expect(Assignment.validPoints('') == 0).to be true

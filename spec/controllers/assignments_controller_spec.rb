@@ -7,10 +7,7 @@ describe AssignmentsController do
         @fakeCourse = FactoryGirl.create(:course)
         @fakeTeacher = FactoryGirl.create(:user, user_id:'teacher', email:'teacher@teacher.com',password:'teacher',password_confirmation:'teacher',role: 'Teacher')
         @fakeStudent = FactoryGirl.create(:user, user_id:'student', email:'student@student.com',password:'student',password_confirmation:'student',role: 'Student')
-        #@fakeStudent = {user_id:'student', email:'student@teacher.com',password:'student',role: 'Student'}
-        #@fakeTeacher = {user_id:'teacher', email:'teacher@teacher.com',password:'teacher',role: 'Teacher'}
         @fakeAssignment = FactoryGirl.create(:assignment)
-        #@fakeUser = double()
     end
     describe 'assignments_home' do
         describe 'no user logged on' do

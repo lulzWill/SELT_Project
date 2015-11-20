@@ -56,9 +56,23 @@ class Assignment < ActiveRecord::Base
     end
     
     def self.validPoints(points)
-        if(points == nil || ( points.is_a? String))
+        if(points.is_a? String)
+            if(self.numeric?(points))
+                points = points.to_i
+            else
+                points = 0
+            end
+        end
+        if(points == nil)
             return 0
         end
         return points
+    end
+    
+    def self.numeric?(string)
+    # `!!` converts parsed number to `true`
+        !!Kernel.Float(string) 
+    rescue TypeError, ArgumentError
+        false
     end
 end    
