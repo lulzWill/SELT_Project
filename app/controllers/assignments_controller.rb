@@ -12,19 +12,16 @@ class AssignmentsController < ApplicationController
         
         if(!@current_user)
             flash[:warning] = "You need to be logged in to see this page"
-        end
-        if(!$course || $course == [])
-            flash[:warning] = "Please select a class to see this page"
-        end
-        if(@current_user.role != "Teacher")
+        elsif(@current_user.role != "Teacher")
             flash[:warning] = "You do not have rights for this page"
+        elsif(!$course || $course == [])
+            flash[:warning] = "Please select a class to see this page"
         end
         
     end
     
     #for creating a new assignments
     def createAssignment
-        redirect_to assignments_home_path
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user.role == "Teacher")
             result = Assignment.createAssignment($course.id, params[:name], params[:points])
@@ -36,6 +33,7 @@ class AssignmentsController < ApplicationController
         else
             flash[:warning] = "Only Teachers can create Assignments"
         end
+        redirect_to assignments_home_path
     end
     
     def updateAssignment
