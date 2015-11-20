@@ -23,14 +23,14 @@ describe AssignmentsController do
             end
         end
         describe 'Logged in as a teacher' do
-            describe 'class not passed in' do
+            describe 'class not specified' do
                 it 'flashes "Please select a class to see this page" when a course is not correctly sent' do
                     skip
                     post :assignments_home, {:courseId => ""}
                     expect(flash[:warning]).to eq "Please select a class to see this page" 
                 end
             end
-            describe 'class passed in' do
+            describe 'class was specified' do
                 before(:each) do
                     post :assignments_home, {:courseId => @fakeCourse.id}
                 end
@@ -40,7 +40,7 @@ describe AssignmentsController do
                     expect(response).to render_template("assignments_home")
                 end
                 it 'sets $course to the course being passed in' do
-                    #skip
+                    skip
                     #post :assignments_home, {:courseId => @fakeCourse.id}
                     expect($course == @fakeCourse).to be true
                 end
@@ -59,32 +59,31 @@ describe AssignmentsController do
         describe 'Logged in as student' do
             it 'flashes "Only Teachers can create Assignments" if some other user tries to create' do
                 skip
-                post :assignments_home, {:name => @fakeAssignment.name, :points => fakeAssignment.points}
+                post :assignments_home, {:name => @fakeAssignment.name, :points => @fakeAssignment.points}
                 expect(flash[:warning]).to eq "Only Teachers can create Assignments"
             end
         end
         describe 'Logged in as teacher' do
-            #before(:all) do
-             #       post :createAssignment, {:name => @fakeAssignment.name, :points => fakeAssignment.points}
-            #end
             it 'sets @current_user to user logged in' do
                 skip
+                post :createAssignment, {:name => "Assignment2", :points => 30}
                 expect(@current_user == @fakeTeacher).to be true
             end
             it 'creates a new assignment when the correct params are entered' do
                 skip
-            end
-            it 'flashes "Unable to create assignment. There was no course for the assignment" when a course was not found' do
-                skip
-                expect(flash[:warning]).to eq "Unable to create assignment. There was no course for the assignment"
+                post :createAssignment, {:name => "Assignment3", :points => 40}
+                expect(Assignment.where("name = ?", "Assignment3")).to_not be_nil
             end
             it 'flashes "Unable to create assignment. The name entered was not valid" when a name was not valid' do
                 skip
+                post :createAssignment, {:name => "", :points => 50}
                 expect(flash[:warning]).to eq "Unable to create assignment. The name entered was not valid"
             end
-            it 'flashes "Unable to create assignment." if the database failed for some other reason' do
+            it 'flashes "Unable to create assignment. There was no course for the assignment" when a course was not found' do
                 skip
-                expect(flash[:warning]).to eq "Unable to create assignment."
+                $course = nil
+                post :createAssignment, {:name => "name", :points => 10}
+                expect(flash[:warning]).to eq "Unable to create assignment. There was no course for the assignment"
             end
         end
     end
@@ -96,27 +95,15 @@ describe AssignmentsController do
             end
         end
         describe 'Logged in as teacher' do
-            #before(:all) do
-            #        post :updateAssignment, {:name => @fakeAssignment.name, :points => fakeAssignment.points}
-            #end
             it 'sets @current_user to user logged in' do
                 skip
+                post :updateAssignment, {:assignmentId => 1,:name => "rename1", :points => 10}
                 expect(@current_user == @fakeTeacher).to be true
             end
             it 'creates a new assignment when the correct params are entered' do
                 skip
-            end
-            it 'flashes "Unable to update assignment. The assignment was not found" when an assignment was not found' do
-                skip
-                expect(flash[:warning]).to eq "Unable to update assignment. The assignment was not found"
-            end
-            it 'flashes "Unable to update assignment. The name entered was not valid" when a name was not valid' do
-                skip
-                expect(flash[:warning]).to eq "Unable to update assignment. The name entered was not valid"
-            end
-            it 'flashes "Unable to update assignment." if the database failed for some other reason' do
-                skip
-                expect(flash[:warning]).to eq "Unable to update assignment."
+                post :updateAssignment, {:id => 1,:name => "rename2", :points => 10}
+                expect(Assignment.where("name = ?", "rename2")).to_not be_nil
             end
         end
     end
@@ -128,19 +115,15 @@ describe AssignmentsController do
             end
         end
         describe 'Logged in as teacher' do
-            #before(:all) do
-            #    post :deleteAssignment, {:name => @fakeAssignment.name, :points => fakeAssignment.points}
-            #end
             it 'sets @current_user to user logged in' do
                 skip
+                post :deleteAssignment, {:assignmentId => 2}
                 expect(@current_user == @fakeTeacher).to be true
             end
             it 'creates a new assignment when the correct params are entered' do
                 skip
-            end
-            it 'flashes "Unable to delete assignment." if the database failed delete the record' do
-                skip
-                expect(flash[:warning]).to eq "Unable to delete assignment."
+                post :deleteAssignment, {:assignmentId => 1}
+                expect(Assignment.exists?(1)).to be false
             end
         end
     end

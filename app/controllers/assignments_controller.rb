@@ -3,15 +3,20 @@ class AssignmentsController < ApplicationController
     #when professor assignments page renders
     def assignments_home
         @current_user = User.find_by_session_token(cookies[:session_token])
-        $course = nil
-        if(Course.exists?(params[:courseId]))
-            $course = Course.find(params[:courseId])
+        if(params[:courseId] != nil)
+            if(Course.exists?(params[:courseId]))
+                $course = Course.find(params[:courseId])
+            end
+        end
+        if($course != nil && Assignment.exists?(:course_id => $course.id))
+            $assignments = Assignment.where("course_id = ?", $course.id)
         end
         #$course = Course.find(1)
-        $assignments = Assignment.where("course_id = ?", $course.id)
         
         if(!@current_user)
             flash[:warning] = "You need to be logged in to see this page"
+            $course = nil
+            $assignments = nil
         elsif(@current_user.role != "Teacher")
             flash[:warning] = "You do not have rights for this page"
         elsif(!$course || $course == [])
