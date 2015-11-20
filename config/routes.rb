@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   match '/home', to: 'users#home', via: :get
   match '/admin_home', to: 'users#admin_home', via: :get
   match '/view_students', to: 'users#view_students', via: :get
+  match '/assignments_home', to: 'assignments#assignments_home', via: :get
+  match '/assignments_home', to: 'assignments#assignments_home', via: :post
+  match '/createAssignment', to: 'assignments#createAssignment', via: :post
+  match '/deleteAssignment', to: 'assignments#deleteAssignment', via: :post
+  match '/updateAssignment', to: 'assignments#updateAssignment', via: :post
   resources :events
   match '/:course_id/:assignment_id/grades', to: 'grades#index', via: :get
   match '/:course_id/:assignment_id/grades/add', to: 'grades#create', via: :post
