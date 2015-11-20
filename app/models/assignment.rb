@@ -46,14 +46,17 @@ class Assignment < ActiveRecord::Base
     end
     
     def self.validName(name)
-        if(name == nil && name.gsub(' ', '') == '')
+        if(!name.is_a? String)
+            return false
+        end
+        if(name == nil || name.gsub(' ', '') == '')
             return false
         end
         return true
     end
     
     def self.validPoints(points)
-        if(points == nil || points.gsub(' ', '') == '')
+        if(points == nil || ( points.is_a? String))
             return 0
         end
         return points
