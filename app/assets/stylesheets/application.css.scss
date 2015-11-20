@@ -21,3 +21,15 @@ body {
     background-image: image-url("oavv3DC.jpg");
     background-repeat: repeat;
 }
+
+#notice {
+    color: yellow;
+    margin: 1em 0;
+    padding-left: 10px;
+}
+
+#warning {
+    color: red;
+    margin: 1em 0;
+    padding-left: 10px;
+}

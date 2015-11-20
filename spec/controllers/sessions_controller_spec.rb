@@ -40,7 +40,7 @@ describe SessionsController do
            expect(assigns(@current_user)).to_not be_nil 
         end
         
-        it 'redirects to courses path' do 
+        it 'redirects to home path' do 
            expect(response).to redirect_to(home_path) 
         end
     end
@@ -51,7 +51,7 @@ describe SessionsController do
        end
         
        it 'redirect_to login path' do
-          expect(response).to redirect_to(login_path) 
+          expect(response).to redirect_to(new_user_path) 
        end
        
        it 'notifies user' do

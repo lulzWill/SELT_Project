@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     def new
         if logged_in?
             flash[:notice]="You are already logged in"
-            redirect_to courses_path
+            redirect_to home_path
         end
         # default, display new.html
     end
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
             flash[:notice] = "You have successfully logged in as #{params[:session][:user_id]}"
         else
             flash[:warning] = "Invalid User-ID/Password combination"
-            redirect_to login_path
+            redirect_to new_user_path
         end
     end
     
@@ -31,6 +31,6 @@ class SessionsController < ApplicationController
         cookies.delete(:session_token) 
         @current_user=nil
         flash[:notice]= 'You have logged out'
-        redirect_to login_path
+        redirect_to new_user_path
     end
 end

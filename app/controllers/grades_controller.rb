@@ -8,7 +8,6 @@ class GradesController < ApplicationController
     def create
         if(Assignment.find(params[:assignment_id])) 
             assignment = Assignment.find(params[:assignment_id])
-            
             attributes_to_update = {:grades => assignment.grades.merge(params[:grade][:user_id] => params[:grade][:points])}
             if assignment.update_attributes!(attributes_to_update)
                 flash[:notice] = "successfully added grade for " + params[:grade][:user_id] + "!"
