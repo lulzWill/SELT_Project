@@ -41,7 +41,7 @@ describe SessionsController do
         end
         
         it 'redirects to courses path' do 
-           expect(response).to redirect_to(courses_path) 
+           expect(response).to redirect_to('/home') 
         end
     end
     

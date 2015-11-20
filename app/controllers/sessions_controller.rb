@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
             flash[:notice] = "You have successfully logged in as #{params[:session][:user_id]}"
         else
             flash[:warning] = "Invalid User-ID/Password combination"
-            redirect_to login_path
+            redirect_to new_user_path
         end
     end
     
