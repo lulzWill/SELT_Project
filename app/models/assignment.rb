@@ -1,8 +1,6 @@
 class Assignment < ActiveRecord::Base
     belongs_to :courses
     serialize :grades, Hash
-    belongs_to :course
-    belongs_to :user
     
     def self.createAssignment(courseID,name,points)
         if(!self.validCourse(courseID)) 

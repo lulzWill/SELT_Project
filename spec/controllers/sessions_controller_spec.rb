@@ -41,7 +41,7 @@ describe SessionsController do
         end
         
         it 'redirects to home path' do 
-           expect(response).to redirect_to(home_path) 
+           expect(response).to redirect_to(admin_home_path) 
         end
     end
     

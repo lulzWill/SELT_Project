@@ -50,7 +50,7 @@ describe AssignmentsController do
                     expect($course == @fakeCourse).to be true
                 end
                 it 'sets @current_user to user logged in' do
-                    expect(assigns(:current_user).should == @fakeTeacher).to be true
+                    expect(assigns(:current_user)).to eq @fakeTeacher
                 end
                 it 'sets $assignments variable when there is a course selected and a logged in user' do
                     expect($course == @fakeCourse).to be true
@@ -65,7 +65,7 @@ describe AssignmentsController do
             end
             it 'sets @current_user to user logged in' do
                 post :createAssignment, {:name => "Assignment2", :points => 30}
-                expect(assigns(:current_user).should == @fakeTeacher).to be true
+                expect(assigns(:current_user)).to eq @fakeTeacher
             end
             it 'creates a new assignment when the correct params are entered' do
                 post :createAssignment, {:name => "Assignment3", :points => 40}
@@ -89,7 +89,7 @@ describe AssignmentsController do
             end
             it 'sets @current_user to user logged in' do
                 post :updateAssignment, {:assignmentId => 1,:name => "rename1", :points => 10}
-                expect(assigns(:current_user).should == @fakeTeacher).to be true
+                expect(assigns(:current_user)).to eq @fakeTeacher
             end
             it 'creates a new assignment when the correct params are entered' do
                 post :updateAssignment, {:id => 1,:name => "rename2", :points => 10}
@@ -104,7 +104,7 @@ describe AssignmentsController do
             end
             it 'sets @current_user to user logged in' do
                 post :deleteAssignment, {:assignmentId => 2}
-                expect(assigns(:current_user).should == @fakeTeacher).to be true
+                expect(assigns(:current_user)).to eq @fakeTeacher
             end
             it 'deletes assignment when the correct params are entered' do
                 post :deleteAssignment, {:assignmentID => 1}
