@@ -4,6 +4,7 @@ FactoryGirl.define do
     email  "admin@admin.com"
     password  "admin1"
     password_confirmation "admin1"
+    role "Admin"
   end
   
   factory :non_logged_user, parent: :user do

@@ -4,16 +4,22 @@ class AssignmentsController < ApplicationController
     def assignments_home
         @current_user = User.find_by_session_token(cookies[:session_token])
         $course = nil
-        #$course = Course.find(params[:courseId])
-        $course = Course.find(1)
+        if(Course.exists?(params[:courseId]))
+            $course = Course.find(params[:courseId])
+        end
+        #$course = Course.find(1)
         $assignments = Assignment.where("course_id = ?", $course.id)
         
         if(!@current_user)
-            flash[:notice] = "You need to be logged in to see this page"
+            flash[:warning] = "You need to be logged in to see this page"
         end
         if(!$course || $course == [])
-            flash[:notice] = "Please select a class to see this page"
+            flash[:warning] = "Please select a class to see this page"
         end
+        if(@current_user.role != "Teacher")
+            flash[:warning] = "You do not have rights for this page"
+        end
+        
     end
     
     #for creating a new assignments
