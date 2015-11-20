@@ -11,14 +11,13 @@ class GradesController < ApplicationController
             attributes_to_update = {:grades => assignment.grades.merge(params[:grade][:user_id] => params[:grade][:points])}
             if assignment.update_attributes!(attributes_to_update)
                 flash[:notice] = "successfully added grade for " + params[:grade][:user_id] + "!"
-                #redirect_to login_path
             else
                 flash[:notice] = "successfully added grade for " + params[:grade][:user_id] + "!"
-                #redirect_to login_path
             end
+            redirect_to "/#{params[:course_id]}/#{params[:assignment_id]}/grades"
         else
             flash[:notice] = "Assignment does not exist!"
-            #redirect_to login_path
+            redirect_to course_path
         end
     end
     
