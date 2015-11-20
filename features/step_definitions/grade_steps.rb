@@ -1,5 +1,28 @@
-Given /^I am on the teacher homepage$/ do
+Given /"(.*?)" is on the "(.*?)" grades page for "(.*?)"/ do |user, assignment, course|
   #ask ryan about index pathing
+  aid = Assignment.find_by_name(assignment).id
+  cid = Course.find_by_course_number(course).id
+  visit "/#{cid}/#{aid}/grades"
+end
+
+Given /"(.*?)" is logged in with password "(.*?)"/ do |id, password|
+    visit login_path
+    fill_in 'user_id', :with => id
+    fill_in 'password', :with => password
+    click_button 'Log in'
+end
+
+Given /User "(.*?)" has been added to "(.*?)"/ do |user, course|
+    u = User.find_by_user_id(user)
+    c =  Course.find_by_course_number(course)
+    u.courses << c
+    c.users << u
+end
+
+Given /Assignment "(.*?)" has been added to "(.*?)"/ do |assignment, course|
+    a = Assignment.find_by_name(assignment)
+    c =  Course.find_by_course_number(course)
+    c.assignments << a
 end
 
 Given /the following users have been added to the database:/ do |users_table|
@@ -24,19 +47,8 @@ Then /I should be redirected to the assignment page with a "(.*?)" message/ do |
     expect(page.text).to match(/#{message}/)
 end
 
-When /I have filled out the form for "(.*?)" students at once/ do |times|
-    visit new_grade_path
-    fill_in 'points_1', :with => '5'
-    select 'user1', :from => 'student_list_1'
-    click_button 'add_additional'
-    fill_in 'points_2', :with => '8'
-    select 'user1', :from => 'student_list_2'
-    click_button 'add_grades'
-end
-
 When /I add a grade with "(.*?)" points/ do |points|
-    visit new_grade_path
     fill_in 'points', :with => points
-    select 'user1', :from => 'student_list'
-    click_button 'add_grades'
+    select 'user1', :from => 'grade_user_id'
+    click_button 'Add Grade'
 end
