@@ -34,6 +34,11 @@ class GradesController < ApplicationController
             @assignment = Assignment.find(params[:assignment_id])
             @course = Course.find(@assignment.course_id)
             @grades = @assignment.grades
+            
+            @userlist = Array.new
+            @course.users.each do |user|
+                @userlist << user.user_id
+            end
         end
     end
 end
