@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :course do
-    id 1 
+    # id 1 
     name "Course1"
     year_restrictions "0"
     course_number "1"

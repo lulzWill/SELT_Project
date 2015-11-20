@@ -14,7 +14,8 @@ class GradesController < ApplicationController
             else
                 flash[:notice] = "successfully added grade for " + params[:grade][:user_id] + "!"
             end
-            redirect_to "/#{params[:course_id]}/#{params[:assignment_id]}/grades"
+            #redirect_to "/#{params[:course_id]}/#{params[:assignment_id]}/grades"
+            redirect_to home_path
         else
             flash[:notice] = "Assignment does not exist!"
             redirect_to home_path
