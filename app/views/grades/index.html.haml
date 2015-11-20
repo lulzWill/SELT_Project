@@ -12,3 +12,13 @@
         %td= user 
         %td= points
         %td= @assignment.points
+
+= form_tag "/#{@course.id}/#{@assignment.id}/grades/add" do
+
+  = label :grade, :user_id, 'Student ID'
+  = text_field :grade, 'user_id'
+
+  = label :grade, :points, 'Points Received'
+  = text_field :grade, 'points'
+  
+  = submit_tag 'Add Grade'
