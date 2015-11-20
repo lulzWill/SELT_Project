@@ -51,7 +51,7 @@ describe SessionsController do
        end
         
        it 'redirect_to login path' do
-          expect(response).to redirect_to(login_path) 
+          expect(response).to redirect_to(new_user_path) 
        end
        
        it 'notifies user' do
