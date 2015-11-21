@@ -25,7 +25,7 @@
                                 <%end%>
                                 <td><button type="button" id = "<%=assignment.id%>" class= "editAssign" data-toggle="modal" data-target="#myModal">Edit Assignment</button></td>
                                 <td><%= button_to 'Delete Assignment', deleteAssignment_path(:assignmentID => assignment.id), method: :post%></td>
-                                <td><%= button_to 'View Grades' %> <!--  grades_path(:assignment_id => assignment.id), method: :post%></td>-->
+                                <td><%= button_to 'View Grades', "/#{$course.id}/#{assignment.id}/grades", method: :get%></td>
                             </tr>
                         <% end %>
                     <% else %>

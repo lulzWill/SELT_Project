@@ -9,11 +9,11 @@ class AssignmentsController < ApplicationController
             else
                 $course = nil
             end
+            
         end
         if($course != nil && Assignment.exists?(:course_id => $course.id))
             $assignments = Assignment.where("course_id = ?", $course.id)
         else
-            $course = nil
             $assignments = nil
         end#$course = Course.find(1)
         
