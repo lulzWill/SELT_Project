@@ -1,19 +1,19 @@
 <h1>Create New Course</h1>
 <%= form_tag courses_path do %>
   <%= label :course, :name, 'Name: ' %>
-  <%= text_field :course, 'name' %>
+  <%= text_field :course, 'name', :id => 'name' %>
   <br>
   <%= label :course, :course_number, 'Course Number: ' %>
-  <%= text_field :course, 'course_number' %>
+  <%= text_field :course, 'course_number', :id => 'course_number' %>
   <br>
   <%= label :course, :year_restrictions, 'Year Restrictions: ' %>
-  <%= text_field :course, 'year_restrictions' %>
+  <%= text_field :course, 'year_restrictions', :id => 'year_restrictions' %>
   <br>
-  <%= label :course, :descrition, 'Description of Course: ' %>
-  <%= text_field :course, 'descrition' %>
+  <%= label :course, :description, 'Description of Course: ' %>
+  <%= text_field :course, 'description', :id => 'description' %>
   <br>
   <%= label :course, :semester_hours, 'Number of Semester Hours: ' %>
-  <%= text_field :course, 'semester_hours' %>
+  <%= text_field :course, 'semester_hours', :id => 'semester_hours' %>
   <br>
-  <%= submit_tag 'Save Course' %>
+  <%= submit_tag 'Save Course', :id => 'save_course' %>
 <% end %>
