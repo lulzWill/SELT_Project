@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe 'Assignment' do
     before(:all) do
-        @fakeCourse = FactoryGirl.create(:course)
+        @fakeCourse = FactoryGirl.create(:course, :name => 'Course2', :year_restrictions => 'none', :course_number => '2')
         @fakeAssignment = FactoryGirl.create(:assignment)
     end
     describe 'validAssignment' do
