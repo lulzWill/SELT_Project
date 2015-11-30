@@ -1,24 +1,29 @@
-%h2= "Details about " + @course.name
-
-%table#grades
-  %thead
-    %tr
-      %th Student Id
-      %th Points Received
-      %th Potential Points
-  %tbody
-    - @grades.each do |user, points|
-      %tr
-        %td= user 
-        %td= points
-        %td= @assignment.points
-
-= form_tag "/#{@course.id}/#{@assignment.id}/grades/add" do
-
-  = label :grade, :user_id, 'Student ID'
-  = select :grade, :user_id, @userlist, :id => 'user_list'
-
-  = label :grade, :points, 'Points Received'
-  = text_field :grade, 'points', :id => 'points'
-  
-  = submit_tag 'Add Grade'
+%div.container
+  %div.row
+    %div.panel.panel-default
+      %div.panel-body{:style => 'height: 40%;'}
+        %div.col-sm-6
+          %h2= "Details about " + @course.name
+          
+          %table#grades.table.table-striped
+            %thead
+              %tr
+                %th Student Id
+                %th Points Received
+                %th Potential Points
+            %tbody
+              - @grades.each do |user, points|
+                %tr
+                  %td= user 
+                  %td= points
+                  %td= @assignment.points
+          
+          = form_tag "/#{@course.id}/#{@assignment.id}/grades/add" do
+          
+            = label :grade, :user_id, 'Student ID'
+            = select :grade, :user_id, @userlist, :id => 'user_list'
+          
+            = label :grade, :points, 'Points Received'
+            = text_field :grade, 'points', :id => 'points'
+            
+            = submit_tag 'Add Grade'
