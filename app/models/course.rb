@@ -1,6 +1,6 @@
 class Course < ActiveRecord::Base
    has_many :assignments
-   belongs_to :user
+   has_many :users
    
    validates :name, :presence => true, :uniqueness => true
    validates :year_restrictions, :presence => true
