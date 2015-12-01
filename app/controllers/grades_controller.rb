@@ -8,17 +8,22 @@ class GradesController < ApplicationController
     def create
         if(Assignment.find(params[:assignment_id])) 
             assignment = Assignment.find(params[:assignment_id])
-            attributes_to_update = {:grades => assignment.grades.merge(params[:grade][:user_id] => params[:grade][:points])}
-            if assignment.update_attributes!(attributes_to_update)
-                flash[:notice] = "successfully added grade for " + params[:grade][:user_id] + "!"
-            else
-                flash[:notice] = "successfully added grade for " + params[:grade][:user_id] + "!"
+            
+            grade_hash = Hash.new
+            params[:grade].each do |user_id, points|
+                grade_hash.merge!(user_id => points)
             end
-            #redirect_to "/#{params[:course_id]}/#{params[:assignment_id]}/grades"
-            redirect_to home_path
+
+            attributes_to_update = {:grades => assignment.grades.merge(grade_hash)}
+            if assignment.update_attributes!(attributes_to_update)
+                flash[:notice] = "successfully added grades!"
+            else
+                flash[:notice] = "Unable to add grades!"
+            end
+            redirect_to "/#{params[:course_id]}/#{params[:assignment_id]}/grades"
         else
             flash[:notice] = "Assignment does not exist!"
-            redirect_to home_path
+            redirect_to course_path
         end
     end
     
@@ -28,8 +33,8 @@ class GradesController < ApplicationController
     
     def index
         if(!Assignment.find(params[:assignment_id]))
-            flash[:notice] = "Assignment does not exist!"
-            redirect_to home_path
+            flash[:message] = "Assignment does not exist!"
+            redirect_to assignments_home_path
         else
             @assignment = Assignment.find(params[:assignment_id])
             @course = Course.find(@assignment.course_id)
@@ -37,7 +42,7 @@ class GradesController < ApplicationController
             
             @userlist = Array.new
             @course.users.each do |user|
-            @userlist << user.user_id
+                @userlist << {:id => user.user_id, :points => @grades[user.user_id]}
             end
         end
     end
