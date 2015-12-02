@@ -1,8 +1,10 @@
+
 %div.container
   %div.row
     %div.panel.panel-default
       %div.panel-body{:style => 'height: 40%;'}
         %div.col-sm-6
+          %h3= link_to 'Assignment', @assignment.file.url
           %h2= "Details about " + @course.name
           
           %table#grades.table.table-striped
