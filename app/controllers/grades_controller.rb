@@ -72,7 +72,12 @@ class GradesController < ApplicationController
                     @grade_stats[">100"] += 1
                 end
             end
-            @average = sum/@grades.count
+            if @grades.count != 0
+                @average = sum/@grades.count
+            else
+                @average = 0
+            end
+            
             @userlist = Array.new
             @course.users.each do |user|
                 if(user.role.eql?("Student"))
