@@ -69,8 +69,7 @@
                 
                   </div>
                 </div>
-        <%end%>
-        <%if(@current_user.role == "Teacher")%>
+        <%else%>
             <table class="table table-striped .table-responsive" >
                 <thead>
                     <tr>
@@ -87,14 +86,14 @@
                             <tr class = "<%=assignment.id%>">
                                 <td><%=assignment.name%></td>
                                 <% #if(there is not a file) %>
-                                    <td>--</td>
+                                    <td></td>
                                 <%#else%>
-                                    <td>--</td>
+                                    <td>Put link to file</td>
                                 <%#end%>
                                 <%# if(the student does not have a score) %>
                                     <td>--</td>
                                 <%#else%>
-                                    <td>--</td>
+                                    <td>put score</td>
                                 <%#end%>
                                 <% if(assignment.points == nil) %>
                                     <td>--</td>
@@ -103,15 +102,23 @@
                                 <%end%>
                                 <%#if(if the student has a grade and the assignment has a total) %>
                                     <%#if(score divided by total >= 90)%>
-                                        <td>A</td>
+                                        <td>A
                                     <%#elsif(score divided by total >= 80)%>
-                                        <td>B</td>
+                                        <td>B
                                     <%#elsif(score divided by total >= 70)%>
-                                        <td>C</td>
+                                        <td>C
                                     <%#elsif(score divided by total >= 60)%>
-                                        <td>D</td>
+                                        <td>D
                                     <%#else%>
-                                        <td>E</td>
+                                        <td>F
+                                    <%#end%>
+                                    <%#if(score mod 10 >= 8)%>
+                                        +</td>
+                                    <%#elsif(score mod 10 <= 2)%>
+                                        -</td>
+                                    <%#else%>
+                                        </td>
+                                    <%#end%>
                                 <%#else%>
                                     <td>--</td>
                                 <%#end%>
@@ -120,6 +127,7 @@
                     <% else %>
                         <tr>
                             <td>No Assignments</td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
