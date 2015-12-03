@@ -1,5 +1,7 @@
 class AssignmentsController < ApplicationController
     before_filter :set_current_user, :only=> ['show', 'edit', 'update', 'delete']
+    before_filter :set_courses
+    
     #when professor assignments page renders
     def assignments_home
         @current_user = User.find_by_session_token(cookies[:session_token])

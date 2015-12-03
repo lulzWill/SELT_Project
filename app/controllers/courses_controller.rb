@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-    before_filter :set_current_user
+    before_filter :set_current_user, :set_courses
     
     def course_params
         params.require(:course).permit(:name, :year_restrictions, :course_number, :description, :semester_hours)    

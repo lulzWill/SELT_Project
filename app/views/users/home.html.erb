@@ -1,15 +1,25 @@
-<h1>Welcome <%=@current_user.user_id%></h1>
-
-<% if @current_user.role != "Admin" %>
-<div id='calendar'></div>
-<% end %>
-
-<p>Courses</p>
-<% for course in @courses%>
-<%= link_to "#{course.name}", course_path(course)%>
-<br>
-<% end %>
-<% if @current_user.role == "Professor" %>
-<%= link_to "View Students", view_students_path%>
-<br>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="container-fluid">
+          <h1>Welcome <%=@current_user.user_id%></h1>
+          
+          <% if @current_user.role != "Admin" %>
+          <div id='calendar'></div>
+          <% end %>
+          
+          <h1>Courses</h1>
+          <% for course in @courses%>
+          <%= link_to "#{course.name}", course_path(course)%>
+          <br>
+          <% end %>
+          <% if @current_user.role == "Professor" %>
+          <%= link_to "View Students", view_students_path%>
+          <br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
