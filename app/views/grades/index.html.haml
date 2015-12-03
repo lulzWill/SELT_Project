@@ -1,39 +1,68 @@
 = javascript_include_tag 'grades_scripts'
+= javascript_include_tag "//www.google.com/jsapi", "chartkick"
 %div.container
   %div.row
     %div.panel.panel-default
       %div.panel-body{:style => 'height: 40%;'}
         %div.col-sm-6
           %h2= @course.name + " - " + @assignment.name + " Grades"
-          
-          %table#grades.table.table-striped
-            %thead
-              %tr
-                %th Student Id
-                %th Points Received
-                %th Potential Points
-            %tbody
-              - @grades.each do |user, points|
-                %tr
-                  %td= user 
-                  %td= points
-                  %td= @assignment.points
-  %div.row
-    %div.panel.panel-default
-      %div.panel-body{:style => 'height: 40%;'}
-        %div.col-sm-6
-          %h2= "Add/Edit Grades for  " + @assignment.name
-          = form_tag "/#{@course.id}/#{@assignment.id}/grades/add" do
+          #grade_contents
             %table#grades.table.table-striped
               %thead
                 %tr
                   %th Student Id
                   %th Points Received
+                  %th Potential Points
               %tbody
-                - @userlist.each do |user|
+                - @grades.each do |user, points|
                   %tr
-                    %td= label :grade, :user_id, user[:id]
-                    %td= text_field :grade, user[:id], :id => 'points', :value => user[:points]
-            = submit_tag 'Add Grades'
-          
+                    %td= user 
+                    %td= points
+                    %td= @assignment.points
+        %div.col-sm-6
+          %button#show_grades.btn.btn-default.btn-md.pull-right
+            %span.glyphicon.glyphicon-plus
+          %button#hide_grades.btn.btn-default.btn-md.pull-right
+            %span.glyphicon.glyphicon-minus
+  %div.row
+    %div.panel.panel-default
+      %div.panel-body{:style => 'height: 40%;'}
+        %div.col-sm-6
+          %h2= "Add/Edit Grades for  " + @assignment.name
+          #form_contents
+            = form_tag "/#{@course.id}/#{@assignment.id}/grades/add" do
+              %table#grades.table.table-striped
+                %thead
+                  %tr
+                    %th Student Id
+                    %th Points Received
+                %tbody
+                  - @userlist.each do |user|
+                    %tr
+                      %td= label :grade, :user_id, user[:id]
+                      %td= text_field :grade, user[:id], :id => 'points', :value => user[:points]
+              = submit_tag 'Add Grades'
+        %div.col-sm-6
+          %button#show_form.btn.btn-default.btn-md.pull-right
+            %span.glyphicon.glyphicon-plus
+          %button#hide_form.btn.btn-default.btn-md.pull-right
+            %span.glyphicon.glyphicon-minus
+  %div.row
+    %div.panel.panel-default
+      %div.panel-body{:style => 'height: 40%;'}
+        %div.row
+          %div.col-sm-6
+            %h2= "Statistics for  " + @assignment.name
+          %div.col-sm-6
+            %button#show_stats.btn.btn-default.btn-md.pull-right
+              %span.glyphicon.glyphicon-plus
+            %button#hide_stats.btn.btn-default.btn-md.pull-right
+              %span.glyphicon.glyphicon-minus
+        %div.row
+          #stats_contents
+            %h4{:style => 'margin-left: 5%'}= "Average score for " + @assignment.name + ": " + String(@average.round(2))
+            %br
+            %h4{:style => 'margin-left: 5%'}= "Score Distribution:"
+            = column_chart @grade_stats, min: 0, max: @userlist.count
+            
           
