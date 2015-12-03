@@ -17,7 +17,7 @@ class Assignment < ActiveRecord::Base
         return self.create!(course_id: courseID, name: name, points: points, file: file)
     end
     
-    def self.updateAssignment(assignmentID,name, points)
+    def self.updateAssignment(assignmentID,name,points,file)
         if(!self.validAssignment(assignmentID)) 
             return "Unable to update assignment"
         end
@@ -26,6 +26,7 @@ class Assignment < ActiveRecord::Base
         end
         points = self.validPoints(points)
         assignment = self.find(assignmentID)
+        assignment.file = file
         assignment.name = name
         assignment.points = points
         assignment.save

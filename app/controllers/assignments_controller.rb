@@ -48,7 +48,7 @@ class AssignmentsController < ApplicationController
     def updateAssignment
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user.role == "Teacher")
-            result = Assignment.updateAssignment(params[:assignmentID].to_i, params[:name], params[:points])
+            result = Assignment.updateAssignment(params[:assignmentID].to_i, params[:name], params[:points], params[:file])
             if(result.is_a? String)
                 flash[:warning] = result
             elsif(result == false)
@@ -71,5 +71,4 @@ class AssignmentsController < ApplicationController
         end
         redirect_to assignments_home_path
     end
-
 end

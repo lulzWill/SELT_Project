@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
     def show
         id = params[:id]
         @course = Course.find(id)
+        redirect_to assignments_home_path(courseId: @course.id), method: :post
     end
     
     def index
@@ -45,6 +46,6 @@ class CoursesController < ApplicationController
        @course = Course.find(params[:id])
        @course.update_attributes!(course_params)
        flash[:notice] = "#{@course.name} was successfully updated."
-       redirect_to course_path(@course)
+       redirect_to assignments_home_path(courseId: @course.id), method: :post
     end    
 end
