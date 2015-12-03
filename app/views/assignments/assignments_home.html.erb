@@ -2,7 +2,7 @@
     <div class ="container-fluid">
         <h1><%=link_to "#{$course.name}", course_path($course.id), method: :get %></h1>
         <h3>Assignments</h3>
-        <%if(@current_user.role == "Teacher")%>
+        <%if(@current_user.role != "Student")%>
             <table class="table table-striped .table-responsive" >
                 <thead>
                     <tr>
@@ -69,6 +69,64 @@
                 
                   </div>
                 </div>
+        <%end%>
+        <%if(@current_user.role == "Teacher")%>
+            <table class="table table-striped .table-responsive" >
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>File</th>
+                        <th>Score</th>
+                        <th>Total</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if($assignments != nil && $assignments != []) %>
+                        <% $assignments.each do |assignment|%>
+                            <tr class = "<%=assignment.id%>">
+                                <td><%=assignment.name%></td>
+                                <% #if(there is not a file) %>
+                                    <td>--</td>
+                                <%#else%>
+                                    <td>--</td>
+                                <%#end%>
+                                <%# if(the student does not have a score) %>
+                                    <td>--</td>
+                                <%#else%>
+                                    <td>--</td>
+                                <%#end%>
+                                <% if(assignment.points == nil) %>
+                                    <td>--</td>
+                                <%else%>
+                                    <td><%=assignment.points%></td>
+                                <%end%>
+                                <%#if(if the student has a grade and the assignment has a total) %>
+                                    <%#if(score divided by total >= 90)%>
+                                        <td>A</td>
+                                    <%#elsif(score divided by total >= 80)%>
+                                        <td>B</td>
+                                    <%#elsif(score divided by total >= 70)%>
+                                        <td>C</td>
+                                    <%#elsif(score divided by total >= 60)%>
+                                        <td>D</td>
+                                    <%#else%>
+                                        <td>E</td>
+                                <%#else%>
+                                    <td>--</td>
+                                <%#end%>
+                            </tr>
+                        <% end %>
+                    <% else %>
+                        <tr>
+                            <td>No Assignments</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <% end%>
+                </tbody>
+            </table>
         <%end%>
     </div>
 <%end%>
