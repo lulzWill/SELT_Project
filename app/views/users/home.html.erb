@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SeltProject</title>
+  <%= javascript_include_tag 'courses', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+
 <div class="container">
   <div class="row">
     <div class="panel panel-default">
@@ -10,11 +19,38 @@
           <% end %>
           
           <h1>Courses</h1>
+          
+          
+          
+
+          
+          
+          
+          
+          
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <% for course in @courses%>
-          <%= link_to "#{course.name}", course_path(course)%>
-          <br>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading<%= course.id %>">
+                <h4 class="panel-title">
+                  <a class="pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= course.id %>" aria-expanded="false" aria-controls="collapse<%= course.id %>">
+                    <span class="glyphicon glyphicon-list"></span>
+                  </a>
+                  <%= link_to "#{course.name}", course_path(course)%>
+                </h4>
+              </div>
+              <div id="collapse<%= course.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= course.id %>">
+                <div class="panel-body">
+                  <p>Course Number: <%= "#{course.course_number}"%></p>
+                  <p>Semester Hours: <%= "#{course.semester_hours}"%></p>
+                  <p>Year Restrictions: <%= "#{course.year_restrictions}"%></p>
+                  <p>Description: <%= "#{course.description}"%></p>
+                </div>
+              </div>
+            </div>
           <% end %>
-          <% if @current_user.role == "Professor" %>
+          </div>
+          <% if @current_user.role == "Teacher" %>
           <%= link_to "View Students", view_students_path%>
           <br>
           <% end %>

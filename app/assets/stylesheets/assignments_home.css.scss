@@ -21,3 +21,14 @@
     cursor: inherit;
     display: block;
 }
+
+.box{
+    display: none;
+    width: 100%;
+}
+
+a:hover + .box,.box:hover{
+    display: block;
+    position: static;
+    z-index: 0;
+}
