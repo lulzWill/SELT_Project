@@ -85,42 +85,42 @@
                         <% $assignments.each do |assignment|%>
                             <tr class = "<%=assignment.id%>">
                                 <td><%=assignment.name%></td>
-                                <%#if(there is not a file) %>
-                                    <td></td>
-                                <%#else%>
-                                    <td>Put link to file</td>
-                                <%#end%>
-                                <% if(assignment.grades{"#{@current_user.id}"} == nil) %>
+                                <%# if(assignment.file_file_name != nil) %>
+                                    <!-- <td><%#= link_to "#{assignment.file_file_name}", assignment.file.url %></td> -->
+                                <%# else %>
+                                    <td>No file added</td>
+                                <%# end %>
+                                <% if(assignment.grades{"#{@current_user.id}"} == nil || assignment.grades{"#{@current_user.id}"} == {}) %>
                                     <td>--</td>
-                                    <%grade = nil%>
+                                    <%@grade = nil%>
                                 <%else%>
-                                    <%grade = assignment.grades{@current_user.id}%>
-                                    <td><%=grade%></td>
+                                    <%@grade = assignment.grades{"#{@current_user.id}"}%>
+                                    <td><%=@grade%></td>
                                 <%end%>
                                 <% if(assignment.points == nil) %>
-                                    <%total = nil%>
+                                    <%@total = nil%>
                                     <td>--</td>
                                 <%else%>
-                                    <%total = assignment.points%>
-                                    <td><%=total%></td>
+                                    <%@total = assignment.points%>
+                                    <td><%=@total%></td>
                                 <%end%>
-                                <%if(grade != nil && total != nil) %>
-                                    <%score = grade/total %>
-                                    <%if(score >= 90)%>
+                                <%if(@grade != nil && @total != nil) %>
+                                    <%@score = @total %>
+                                    <%if(@score >= 90)%>
                                         <td>A
-                                    <%elsif(score >= 80)%>
+                                    <%elsif(@score >= 80)%>
                                         <td>B
-                                    <%elsif(score >= 70)%>
+                                    <%elsif(@score >= 70)%>
                                         <td>C
-                                    <%elsif(score >= 60)%>
+                                    <%elsif(@score >= 60)%>
                                         <td>D
                                     <%else%>
                                         <td>F
                                     <%end%>
-                                    <%if(score mod 10 >= 8 && score >=60)%>
-                                        +</td>
-                                    <%elsif(score mod 10 <= 2 && score >=60)%>
-                                        -</td>
+                                    <%if(@score%10 >= 8 && @score >=60)%>
+                                        </td>
+                                    <%elsif(@score%10 <= 2 && @score >=60)%>
+                                        </td>
                                     <%else%>
                                         </td>
                                     <%end%>
