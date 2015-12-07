@@ -4,11 +4,11 @@ Background: user in the user table
   
   Given the following users have been added to the table 
   |user_id|password_digest|role   |
-  |admin  |admin1         |admin  | 
+  |admin  |admin1         |Admin  | 
   
-  And "admin" is logged in with password "admin1"
-  And "admin" is on the courses page
+  #And "admin" is logged in with password "admin1"
+  #And "admin" is on the courses page
   
 Scenario: Add a course with valid params
-    When I have entered a course with name "Rails" and year_restrictions "none" and course_number "356" and description "Learn to program rails"
-    Then I should see a course list entry with title "Rails" and course_number "356" 
+    When I have added a course with name "Rails" and year_restrictions "none" and course_number "356" and description "Learn to program rails"
+    Then I should see a course list entry with name "Rails" and course_number "356" 
