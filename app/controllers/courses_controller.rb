@@ -16,6 +16,11 @@ class CoursesController < ApplicationController
     
     def index
         @courses = Course.all
+        if params[:search]
+            @courses = Course.search(params[:search]).order("created_at DESC")
+        else
+            @courses = Course.all.order('created_at DESC')
+        end
     end
     
     def create
@@ -38,13 +43,21 @@ class CoursesController < ApplicationController
     end
     
     def edit
-       @course = Course.find(params[:id]) 
+        if(@current_user.role == 'admin')
+            @course = Course.find(params[:id])
+        else
+           flash[:warning] = "Only admins can do this!" 
+        end    
     end
     
     def update
-       @course = Course.find(params[:id])
-       @course.update_attributes!(course_params)
-       flash[:notice] = "#{@course.name} was successfully updated."
-       redirect_to course_path(@course)
-    end    
+        if(@current_user.role == 'admin')
+            @course = Course.find(params[:id])
+            @course.update_attributes!(course_params)
+            flash[:notice] = "#{@course.name} was successfully updated."
+            redirect_to course_path(@course)
+        else
+           flash[:warning] = "Only admins can do this!" 
+        end    
+    end
 end

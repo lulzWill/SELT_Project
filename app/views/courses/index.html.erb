@@ -1,4 +1,13 @@
 <h1>All Courses</h1>
+
+<%= form_tag(courses_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Courses" %>
+  <%= submit_tag "Search" %>
+  <br>
+    <%= link_to 'Back to Course List',  courses_path %>
+  </br>
+<% end %>
+
 <table id="courses">
   <thead>
     <tr>
@@ -23,4 +32,11 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Add new course', new_course_path %>
+
+<%if @current_user.role == 'Admin' %>
+  <%= link_to 'Add new course', new_course_path %>
+<%end%>
+
+<%if @current_user.role == 'Student' %>
+  <%='Enroll in Course'%>
+<%end%>
