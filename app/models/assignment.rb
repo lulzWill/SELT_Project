@@ -5,19 +5,22 @@ class Assignment < ActiveRecord::Base
     has_attached_file :file, styles: { :large => "1000x1000#", :medium => "550x550#"}
     validates_attachment :file, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
     
-    def self.createAssignment(courseID,name,points,file)
+    def self.createAssignment(courseID,title,points,file,dueDate)
         if(!self.validCourse(courseID)) 
             return "Unable to create assignment. There was no course for the assignment"
         end
-        if(!self.validName(name))
+        if(!self.validName(title))
             return "Unable to create assignment. The name entered was not valid"
         end
         points = self.validPoints(points)
+        #if(!self.validDueDate(dueDate))
+         #   return "Unable to create assignment. The due date is past"
+        #end
         
-        return self.create!(course_id: courseID, name: name, points: points, file: file)
+        return self.create!(course_id: courseID, title: title, points: points, start_at: dueDate, end_at: dueDate, file: file)
     end
     
-    def self.updateAssignment(assignmentID,name,points,file)
+    def self.updateAssignment(assignmentID, name, points, file, date)
         if(!self.validAssignment(assignmentID)) 
             return "Unable to update assignment"
         end
@@ -27,8 +30,9 @@ class Assignment < ActiveRecord::Base
         points = self.validPoints(points)
         assignment = self.find(assignmentID)
         assignment.file = file
-        assignment.name = name
+        assignment.title = title
         assignment.points = points
+        assignment.start_at = date
         assignment.save
         return assignment.save
     end
@@ -71,6 +75,11 @@ class Assignment < ActiveRecord::Base
             return 0
         end
         return points
+    end
+    
+    def self.validDueDate(dueDate)
+       if(dueDate.past?) 
+       end
     end
     
     def self.numeric?(string)
