@@ -6,7 +6,7 @@
       %div.panel.panel-default
         %div.panel-body{:style => 'height: 40%;'}
           %div.col-sm-6
-            %h2= @course.name + " - " + @assignment.name + " Grades"
+            %h2= @course.name + " - " + @assignment.title + " Grades"
             #grade_contents
               %table#grades.table.table-striped
                 %thead
@@ -29,7 +29,7 @@
       %div.panel.panel-default
         %div.panel-body{:style => 'height: 40%;'}
           %div.col-sm-6
-            %h2= "Add/Edit Grades for  " + @assignment.name
+            %h2= "Add/Edit Grades for  " + @assignment.title
             #form_contents
               = label :grade, :quick_search, "Quick Filter By User ID:"
               = text_field :grade, :quick_search, :id => 'quickfilter'
@@ -55,7 +55,7 @@
       %div.panel-body{:style => 'height: 40%;'}
         %div.row
           %div.col-sm-6
-            %h2= "Statistics for  " + @assignment.name
+            %h2= "Statistics for  " + @assignment.title
           %div.col-sm-6
             %button#show_stats.btn.btn-default.btn-md.pull-right
               %span.glyphicon.glyphicon-plus
@@ -63,7 +63,7 @@
               %span.glyphicon.glyphicon-minus
         %div.row
           #stats_contents
-            %h4{:style => 'margin-left: 5%'}= "Average score for " + @assignment.name + ": " + String(@average.round(2))
+            %h4{:style => 'margin-left: 5%'}= "Average score for " + @assignment.title + ": " + String(@average.round(2))
             %br
             %h4{:style => 'margin-left: 5%'}= "Score Distribution:"
             = column_chart @grade_stats, min: 0, max: @userlist.count

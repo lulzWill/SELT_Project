@@ -7,7 +7,6 @@ class CreateAssignments < ActiveRecord::Migration
       t.string :role
       t.string :year
       t.references 'assignment'
-      t.references 'course'
       t.timestamps
     end
     add_index :users, :user_id, unique: true
@@ -17,7 +16,6 @@ class CreateAssignments < ActiveRecord::Migration
       t.string :course_number
       t.string :description
       t.references 'assignment'
-      t.references 'user'
       t.timestamps
     end
     create_table :assignments do |t|

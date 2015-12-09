@@ -13,6 +13,8 @@ class SessionsController < ApplicationController
         user = User.find_by_user_id(params[:session][:user_id])
         check = user && user.authenticate(params[:session][:password])
         if check
+            user.session_token = SecureRandom.urlsafe_base64
+            user.save!
             #flash[:notice] = "Logged in as #{params[:session][:user_id]}"
             cookies.permanent[:session_token]=user.session_token
             if user.role == "Admin"

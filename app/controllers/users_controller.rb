@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     
-    before_filter :set_current_user, :only=> ['show', 'edit', 'update', 'delete']
+    before_filter :set_current_user, :only => ['show', 'edit', 'update', 'delete']
     before_filter :set_courses
     
     def user_params
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     def new
         if logged_in?
             flash[:notice]="You are already logged in"
-            redirect_to courses_path
+            redirect_to home_path
         end
     #render new template
     end

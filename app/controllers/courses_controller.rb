@@ -61,10 +61,9 @@ class CoursesController < ApplicationController
     end    
     
     def enroll
-       @current_user = User.find_by_session_token(cookies[:session_token])
-       @current_user.courses << Course.find(params[:courseId])
-       #Course.find(params[:courseId]).users << @current_user
+       course = Course.find(params[:courseId])
+       @current_user.courses << course
        flash[:notice] = "Enrolled in #{Course.find(params[:courseId]).name}"
-       redirect_to courses_path
+       redirect_to home_path
     end
 end

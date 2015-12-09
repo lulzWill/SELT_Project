@@ -37,7 +37,7 @@ class AssignmentsController < ApplicationController
     def createAssignment
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user.role != "Student" && $course != nil && $course != [])
-            result = Assignment.createAssignment($course.id, params[:title], params[:points], params[:dueDate])
+            result = Assignment.createAssignment($course.id, params[:title], params[:points], params[:file], params[:dueDate])
             if(result.is_a? String)
                 flash[:warning] = result
             elsif(result == false)

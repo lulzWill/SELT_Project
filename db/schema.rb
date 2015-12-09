@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20151202005535) do
+ActiveRecord::Schema.define(version: 20151209221931) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "course_id"
@@ -40,10 +39,24 @@ ActiveRecord::Schema.define(version: 20151202005535) do
     t.string   "course_number"
     t.string   "description"
     t.integer  "assignment_id"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "semester_hours"
+  end
+
+  create_table "courses_users", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string   "allDay"
+    t.string   "user_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,7 +66,6 @@ ActiveRecord::Schema.define(version: 20151202005535) do
     t.string   "role"
     t.string   "year"
     t.integer  "assignment_id"
-    t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "session_token"

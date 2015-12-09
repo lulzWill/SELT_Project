@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   def logged_in?
-    if User.find_by_session_token(cookies[:session_token])
+    if cookies[:session_token]
       return true
     else
       return false
