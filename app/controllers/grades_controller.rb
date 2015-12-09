@@ -35,13 +35,13 @@ class GradesController < ApplicationController
     
     def index
         if(!Assignment.find(params[:assignment_id]))
-            flash[:message] = "Assignment does not exist!"
+            flash[:notice] = "Assignment does not exist!"
             redirect_to assignments_home_path
         else
             @assignment = Assignment.find(params[:assignment_id])
             @course = Course.find(@assignment.course_id)
             @grades = @assignment.grades
-            @grade_stats = {"0-10" => 0, "10-20" => 0, "20-30" => 0, "30-40" => 0, "40-50" => 0, "50-60" => 0, "60-70" => 0, "70-80" => 0, "80-90" => 0, "90-100" => 0, ">100" => 0}
+            @grade_stats = {"0-10" => 0, "10-20" => 0, "20-30" => 0, "30-40" => 0, "40-50" => 0, "50-60" => 0, "60-70" => 0, "70-80" => 0, "80-90" => 0, "90-100" => 0, ">=100" => 0}
             sum = 0
             
             @grades.each do |user, points|
@@ -69,7 +69,7 @@ class GradesController < ApplicationController
                 elsif(outofhundred >= 90 && outofhundred < 100)
                     @grade_stats["90-100"] += 1
                 elsif(outofhundred >= 100)
-                    @grade_stats[">100"] += 1
+                    @grade_stats[">=100"] += 1
                 end
             end
             if @grades.count != 0

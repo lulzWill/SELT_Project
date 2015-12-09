@@ -16,7 +16,7 @@ RSpec.describe GradesController, type: :controller do
         it 'redirects to assignments home' do
             expect(Assignment).to receive(:find).and_return(false)
             get :index
-            expect(response).to redirect_to(home_path)
+            expect(response).to redirect_to(assignments_home_path)
             expect(flash[:notice]).to eq("Assignment does not exist!")
         end
         it 'goes to index page' do
