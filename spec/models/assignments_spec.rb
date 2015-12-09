@@ -2,21 +2,21 @@ require 'rails_helper'
 require 'spec_helper'
 
 describe 'Assignment' do
-    before(:all) do
+    before(:each) do
         @fakeCourse = FactoryGirl.create(:course, :name => 'Course2', :year_restrictions => 'none', :course_number => '2')
         @fakeAssignment = FactoryGirl.create(:assignment)
     end
     describe 'validAssignment' do
         it "should return true if the assignment exists" do
-           expect(Assignment.validAssignment(1)).to be true
+           expect(Assignment.validAssignment(@fakeAssignment.id)).to be true
         end
         it "should return false if the assignment does not exist" do
            expect(Assignment.validAssignment(50)).to be false
         end
     end
-    describe 'validCoures' do
+    describe 'validCourse' do
         it "should return true if the course exists" do
-           expect(Assignment.validCourse(1)).to be true
+           expect(Assignment.validCourse(@fakeCourse.id)).to be true
         end
         it "should return false if the course does not exist" do
            expect(Assignment.validCourse(50)).to be false
