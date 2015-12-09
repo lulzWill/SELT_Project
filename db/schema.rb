@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117021930) do
+ActiveRecord::Schema.define(version: 20151202005535) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "course_id"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 20151117021930) do
     t.integer  "order"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   add_index "assignments", ["course_id"], name: "index_assignments_on_course_id"

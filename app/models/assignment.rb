@@ -2,7 +2,10 @@ class Assignment < ActiveRecord::Base
     belongs_to :courses
     serialize :grades, Hash
     
-    def self.createAssignment(courseID,name,points)
+    has_attached_file :file, styles: { :large => "1000x1000#", :medium => "550x550#"}
+    validates_attachment :file, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
+    
+    def self.createAssignment(courseID,name,points,file)
         if(!self.validCourse(courseID)) 
             return "Unable to create assignment. There was no course for the assignment"
         end
@@ -11,10 +14,10 @@ class Assignment < ActiveRecord::Base
         end
         points = self.validPoints(points)
         
-        return self.create!(course_id: courseID, name: name, points: points)
+        return self.create!(course_id: courseID, name: name, points: points, file: file)
     end
     
-    def self.updateAssignment(assignmentID,name, points)
+    def self.updateAssignment(assignmentID,name,points,file)
         if(!self.validAssignment(assignmentID)) 
             return "Unable to update assignment"
         end
@@ -23,6 +26,7 @@ class Assignment < ActiveRecord::Base
         end
         points = self.validPoints(points)
         assignment = self.find(assignmentID)
+        assignment.file = file
         assignment.name = name
         assignment.points = points
         assignment.save
