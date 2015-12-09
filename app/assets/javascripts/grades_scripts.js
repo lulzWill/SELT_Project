@@ -3,7 +3,7 @@ $(document).ready(function(){
     $("#show_grades").hide();
     $("#show_stats").hide();
     
-    $( "#quickfilter" ).change(function() {
+    $( "#quickfilter" ).keyup(function() {
       $("#addgrades tbody tr").hide();
       $("#addgrades tbody tr:contains("+ $("#quickfilter").val() +")").show();
     });
