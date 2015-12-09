@@ -193,6 +193,7 @@
                                         <%end%>
                                         <%if(@grade != nil && @total != nil) %>
                                             <%@score = Float(Integer(@grade)/Integer(@total)*100) %>
+                                            
                                             <%if(@score >= 90)%>
                                                 <td>A
                                             <%elsif(@score >= 80)%>
