@@ -44,9 +44,6 @@ class UsersController < ApplicationController
         end
     end
     
-    def admin_home 
-        @current_user = User.find_by_session_token(cookies[:session_token])
-    end
     
     def admin_view_professors
         @current_user = User.find_by_session_token(cookies[:session_token])
@@ -84,9 +81,6 @@ class UsersController < ApplicationController
     def home
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user)
-            if @current_user.role == "Admin"
-                redirect_to admin_home_path
-            end
             @courses = @current_user.courses
        else
             redirect_to new_user_path
