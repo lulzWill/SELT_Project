@@ -140,11 +140,11 @@
                                 <% $assignments.each do |assignment|%>
                                     <tr class = "<%=assignment.id%>">
                                         <td><%=assignment.name%></td>
-                                        <%# if(assignment.file_file_name != nil) %>
-                                            <!-- <td><%#= link_to "#{assignment.file_file_name}", assignment.file.url %></td> -->
-                                        <%# else %>
+                                        <% if(assignment.file_file_name != nil) %>
+                                            <td><%= link_to "#{assignment.file_file_name}", assignment.file.url %></td>
+                                        <% else %>
                                             <td>No file added</td>
-                                        <%# end %>
+                                        <% end %>
                                         <% if(assignment.grades{"#{@current_user.id}"} == nil || assignment.grades{"#{@current_user.id}"} == {}) %>
                                             <td>--</td>
                                             <%@grade = nil%>
