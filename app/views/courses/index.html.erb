@@ -23,4 +23,6 @@
     <% end %>
   </tbody>
 </table>
+<% if @current_user.role == "Admin" %>
 <%= link_to 'Add new course', new_course_path %>
+<% end %>

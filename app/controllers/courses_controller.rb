@@ -10,12 +10,14 @@ class CoursesController < ApplicationController
     end
     
     def show
+        @current_user = User.find_by_session_token(cookies[:session_token])
         id = params[:id]
         @course = Course.find(id)
     end
     
     def index
         @courses = Course.all
+        #@current_user = User.find_by_session_token(cookies[:session_token])
     end
     
     def create
@@ -47,4 +49,12 @@ class CoursesController < ApplicationController
        flash[:notice] = "#{@course.name} was successfully updated."
        redirect_to course_path(@course)
     end    
+    
+    def enroll
+       @current_user = User.find_by_session_token(cookies[:session_token])
+       @current_user.courses << Course.find(params[:courseId])
+       #Course.find(params[:courseId]).users << @current_user
+       flash[:notice] = "Enrolled in #{Course.find(params[:courseId]).name}"
+       redirect_to courses_path
+    end
 end

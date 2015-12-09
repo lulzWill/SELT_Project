@@ -1,0 +1,15 @@
+<h1>Student Information</h1>
+
+<p>Name:  <%=@student.name%></p>
+<br>
+<p>Email: <%=@student.email%></p>
+<br>
+<p>User ID: <%=@student.user_id%></p>
+<br>
+<p>Year: <%=@student.year%></p>
+<br>
+<%if @student.ta != true%>
+<%= button_to 'Promote to TA', promote_TA_path(userId: @student.user_id), method: :post %>
+<% else %>
+<%= button_to 'Demote from TA', demote_TA_path(userId: @student.user_id), method: :post %>
+<% end %>

@@ -2,19 +2,22 @@ class Assignment < ActiveRecord::Base
     belongs_to :courses
     serialize :grades, Hash
     
-    def self.createAssignment(courseID,name,points)
+    def self.createAssignment(courseID,title,points,dueDate)
         if(!self.validCourse(courseID)) 
             return "Unable to create assignment. There was no course for the assignment"
         end
-        if(!self.validName(name))
+        if(!self.validName(title))
             return "Unable to create assignment. The name entered was not valid"
         end
         points = self.validPoints(points)
+        #if(!self.validDueDate(dueDate))
+         #   return "Unable to create assignment. The due date is past"
+        #end
         
-        return self.create!(course_id: courseID, name: name, points: points)
+        return self.create!(course_id: courseID, title: title, points: points, start_at: dueDate, end_at: dueDate)
     end
     
-    def self.updateAssignment(assignmentID,name, points)
+    def self.updateAssignment(assignmentID, name, points, date)
         if(!self.validAssignment(assignmentID)) 
             return "Unable to update assignment"
         end
@@ -23,8 +26,9 @@ class Assignment < ActiveRecord::Base
         end
         points = self.validPoints(points)
         assignment = self.find(assignmentID)
-        assignment.name = name
+        assignment.title = title
         assignment.points = points
+        assignment.start_at = date
         assignment.save
         return assignment.save
     end
@@ -67,6 +71,11 @@ class Assignment < ActiveRecord::Base
             return 0
         end
         return points
+    end
+    
+    def self.validDueDate(dueDate)
+       if(dueDate.past?) 
+       end
     end
     
     def self.numeric?(string)
