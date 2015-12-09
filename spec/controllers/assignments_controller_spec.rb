@@ -19,15 +19,15 @@ describe AssignmentsController do
                 expect(flash[:warning]).to eq "You need to be logged in to see this page" 
             end
         end
-        describe 'Logged in as student' do
-            before(:each) do
-                cookies.permanent[:session_token] = @fakeStudent.session_token
-            end
-            it 'flashes "You do not have rights for this page" when not a teacher' do
-                post :assignments_home, {:courseId => @fakeCourse.id}
-                expect(flash[:warning]).to eq "You do not have rights for this page"
-            end
-        end
+       #describe 'Logged in as student' do
+        #    before(:each) do
+         #       cookies.permanent[:session_token] = @fakeStudent.session_token
+          #  end
+           # it 'flashes "You do not have rights for this page" when not a teacher' do
+            #    post :assignments_home, {:courseId => @fakeCourse.id}
+             #   expect(flash[:warning]).to eq "You do not have rights for this page"
+            #end
+        #end
         describe 'Logged in as a teacher' do
             describe 'class not specified' do
                 before(:each) do

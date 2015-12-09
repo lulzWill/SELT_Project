@@ -23,8 +23,8 @@ class AssignmentsController < ApplicationController
             flash[:warning] = "You need to be logged in to see this page"
             $course = nil
             $assignments = nil
-        elsif(@current_user.role != "Teacher")
-            flash[:warning] = "You do not have rights for this page"
+        #elsif(@current_user.role != "Teacher")
+            #flash[:warning] = "You do not have rights for this page"
         elsif(!$course || $course == [])
             flash[:warning] = "Please select a class to see this page"
         end
