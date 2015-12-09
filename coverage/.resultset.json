@@ -1,11 +1,11 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/ubuntu/workspace/SELT_Project/app/helpers/application_helper.rb": [
+      "/home/ubuntu/workspace/seltProject/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/controllers/users_controller.rb": [
+      "/home/ubuntu/workspace/seltProject/app/controllers/users_controller.rb": [
         1,
         null,
         1,
@@ -101,7 +101,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/controllers/application_controller.rb": [
+      "/home/ubuntu/workspace/seltProject/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -125,7 +125,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/controllers/sessions_controller.rb": [
+      "/home/ubuntu/workspace/seltProject/app/controllers/sessions_controller.rb": [
         1,
         1,
         null,
@@ -163,7 +163,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/controllers/assignments_controller.rb": [
+      "/home/ubuntu/workspace/seltProject/app/controllers/assignments_controller.rb": [
         1,
         1,
         null,
@@ -240,7 +240,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/controllers/courses_controller.rb": [
+      "/home/ubuntu/workspace/seltProject/app/controllers/courses_controller.rb": [
         1,
         1,
         null,
@@ -292,7 +292,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/controllers/grades_controller.rb": [
+      "/home/ubuntu/workspace/seltProject/app/controllers/grades_controller.rb": [
         1,
         1,
         null,
@@ -303,12 +303,19 @@
         1,
         1,
         0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
         0,
         0,
         0,
         null,
         0,
-        null,
         null,
         0,
         null,
@@ -329,16 +336,54 @@
         0,
         0,
         0,
+        0,
+        0,
         null,
         0,
         0,
         0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
         null,
         null,
         null,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/models/user.rb": [
+      "/home/ubuntu/workspace/seltProject/app/models/user.rb": [
         1,
         1,
         1,
@@ -357,7 +402,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/models/course.rb": [
+      "/home/ubuntu/workspace/seltProject/app/models/course.rb": [
         1,
         1,
         1,
@@ -368,7 +413,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/SELT_Project/app/models/assignment.rb": [
+      "/home/ubuntu/workspace/seltProject/app/models/assignment.rb": [
         1,
         1,
         1,
@@ -449,6 +494,6 @@
         null
       ]
     },
-    "timestamp": 1448082511
+    "timestamp": 1449633306
   }
 }

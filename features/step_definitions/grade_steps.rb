@@ -47,8 +47,17 @@ Then /I should be redirected to the assignment page with a "(.*?)" message/ do |
     expect(page.text).to match(/#{message}/)
 end
 
-When /I add a grade with "(.*?)" points/ do |points|
-    fill_in 'points', :with => points
-    select 'user1', :from => 'grade_user_id'
-    click_button 'Add Grade'
+When /I add a grade with "(.*?)" points for "(.*?)"/ do |points, user|
+    fill_in 'grade[' + user + ']', :with => points
+    click_button 'Add Grades'
+end
+
+When /I add multiple grades with "(.*?)" points for "(.*?)" and "(.*?)" points for "(.*?)"/ do |points1, user1, points2, user2|
+    fill_in 'grade[' + user1 + ']', :with => points1
+    fill_in 'grade[' + user2 + ']', :with => points2
+    click_button 'Add Grades'
+end
+
+Then /I should be able to see the average score of "(.*?)" on the "(.*?)" page/ do |average, assignment|
+    expect(page.text).to match(/Average score for #{assignment}: #{average}/)
 end

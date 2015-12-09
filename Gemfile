@@ -30,7 +30,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-
+gem "chartkick"
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'factory_girl_rails'
