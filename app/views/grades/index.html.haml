@@ -31,8 +31,10 @@
           %div.col-sm-6
             %h2= "Add/Edit Grades for  " + @assignment.name
             #form_contents
+              = label :grade, :quick_search, "Quick Filter By User ID:"
+              = text_field :grade, :quick_search, :id => 'quickfilter'
               = form_tag "/#{@course.id}/#{@assignment.id}/grades/add" do
-                %table#grades.table.table-striped
+                %table#addgrades.table.table-striped
                   %thead
                     %tr
                       %th Student Id
@@ -41,7 +43,7 @@
                     - @userlist.each do |user|
                       %tr
                         %td= label :grade, :user_id, user[:id]
-                        %td= text_field :grade, user[:id], :id => 'points', :value => user[:points]
+                        %td= number_field :grade, user[:id], :id => 'points', :value => user[:points], :step => "any"
                 = submit_tag 'Add Grades'
           %div.col-sm-6
             %button#show_form.btn.btn-default.btn-md.pull-right

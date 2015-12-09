@@ -3,6 +3,11 @@ $(document).ready(function(){
     $("#show_grades").hide();
     $("#show_stats").hide();
     
+    $( "#quickfilter" ).change(function() {
+      $("#addgrades tbody tr").hide();
+      $("#addgrades tbody tr:contains("+ $("#quickfilter").val() +")").show();
+    });
+    
     $("#show_form").click(function() {
       $('#form_contents').show();
       $('#hide_form').show();
