@@ -3,6 +3,9 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( signup_scripts.js )
+Rails.application.config.assets.precompile += %w( assignments_home.css )
+Rails.application.config.assets.precompile += %w( courses.js )
+Rails.application.config.assets.precompile += %w( grades_scripts.js )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

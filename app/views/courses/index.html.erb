@@ -1,26 +1,36 @@
-<h1>All Courses</h1>
-<table id="courses">
-  <thead>
-    <tr>
-      <th>Course Name</th>
-      <th>Course Number</th>
-      <th>More Info</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td>
-          <%= course.name  %>
-        </td>
-        <td>
-          <%= course.course_number %>
-        </td>
-        <td>
-          <%= link_to "More about #{course.name}", course_path(course) %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'Add new course', new_course_path %>
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="container-fluid">
+          <h1>All Courses</h1>
+          <table id="courses">
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Number</th>
+                <th>More Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @courses.each do |course| %>
+                <tr>
+                  <td>
+                    <%= course.name  %>
+                  </td>
+                  <td>
+                    <%= course.course_number %>
+                  </td>
+                  <td>
+                    <%= link_to "More about #{course.name}", course_path(course) %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to 'Add new course', new_course_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
