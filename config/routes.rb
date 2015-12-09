@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   match '/updateAssignment', to: 'assignments#updateAssignment', via: :post
   match '/:course_id/:assignment_id/grades', to: 'grades#index', via: :get
   match '/:course_id/:assignment_id/grades/add', to: 'grades#create', via: :post
-  match '/calendar', to: 'users#calendar', via: :get
   match '/student_info', to: 'users#student_info', via: :get
   match '/promote_TA', to: 'users#promote_TA', via: :post
   match '/demote_TA', to: 'users#demote_TA', via: :post

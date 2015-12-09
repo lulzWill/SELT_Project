@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     def admin_view_professors
         @current_user = User.find_by_session_token(cookies[:session_token])
         if @current_user.role == "Admin"
-            @professors = User.where(:role => "Professor")
+            @professors = User.where(:role => "Teacher")
         else
             flash[:notice] = "You are not authorized to view this"
             redirect_to home_path
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     
     def view_students
         @current_user = User.find_by_session_token(cookies[:session_token])
-        if @current_user.role == "Professor"
+        if @current_user.role == "Teacher"
            @students = User.where(:role => "Student")
            for course in @current_user.courses
              for student in @students
@@ -99,16 +99,6 @@ class UsersController < ApplicationController
         user.update(ta: false)
         flash[:notice] = "Student is no longer a TA"
         redirect_to view_students_path
-    end
-    
-    def calendar
-        @current_user = User.find_by_session_token(cookies[:session_token])
-        @events = @current_user.assignments
-        puts @events
-        respond_to do |format| 
-          format.html
-          format.json { render :json => @events } 
-        end
     end
     
     
