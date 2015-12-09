@@ -17,7 +17,8 @@ class UsersController < ApplicationController
     
     def show
         @user=@current_user
-		if !current_user?(params[:id])	
+         @student = User.find(params[:id])
+		if !current_user?(params[:id]) && @current_user.role == "Student"
 		    flash[:warning]='Can only show profile of logged-in	user'	
 		end	
     end
@@ -44,14 +45,11 @@ class UsersController < ApplicationController
         end
     end
     
-    def admin_home 
-        @current_user = User.find_by_session_token(cookies[:session_token])
-    end
     
     def admin_view_professors
         @current_user = User.find_by_session_token(cookies[:session_token])
         if @current_user.role == "Admin"
-            @professors = User.where(:role => "Professor")
+            @professors = User.where(:role => "Teacher")
         else
             flash[:notice] = "You are not authorized to view this"
             redirect_to home_path
@@ -60,10 +58,21 @@ class UsersController < ApplicationController
     
     def view_students
         @current_user = User.find_by_session_token(cookies[:session_token])
-        if @current_user.role == "Professor"
-           @students = nil
+        if @current_user.role == "Teacher"
+           @students = User.where(:role => "Student")
+           for course in @current_user.courses
+             for student in @students
+               for studentCourse in student.courses
+                 if studentCourse == course
+                     @store << student
+                 end
+               end
+             end
+           end
+         
+           
         elsif @current_user.role == "Admin"
-            @students = User.where(:role => "Student")
+            @store = User.where(:role => "Student")
         else
             flash[:notice] = "You are not authorized to view students"
             redirect_to home_path
@@ -73,23 +82,25 @@ class UsersController < ApplicationController
     def home
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user)
-            if @current_user.role == "Admin"
-                redirect_to admin_home_path
-            end
-            @courses = Course.all
-        else
+            @courses = @current_user.courses
+       else
             redirect_to new_user_path
         end
     end
     
-    #def promote_TA
-    #    User.update!(params[:id], :ta => true)
-    #    redirect_to view_students_path
-    #end
+    def promote_TA
+        user = User.find_by_user_id(params[:userId])
+        user.update(ta: true)
+        flash[:notice] = "Student promoted to TA"
+        redirect_to view_students_path
+    end
     
-    #def demote_TA
-    #    User.update!(params[:id], :ta => false)
-    #    redirect_to view_students_path
-    #end
+    def demote_TA
+        user = User.find_by_user_id(params[:userId])
+        user.update(ta: false)
+        flash[:notice] = "Student is no longer a TA"
+        redirect_to view_students_path
+    end
+    
     
 end

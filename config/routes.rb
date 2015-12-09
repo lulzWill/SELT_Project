@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :events
   resources :users
   resources :courses
   resources :grades
+  resources :assignments
   root 'users#new'
   resources :sessions, only: [:new, :create, :destroy]
   match '/login', to: 'sessions#new', via: :get
@@ -14,9 +16,12 @@ Rails.application.routes.draw do
   match '/createAssignment', to: 'assignments#createAssignment', via: :post
   match '/deleteAssignment', to: 'assignments#deleteAssignment', via: :post
   match '/updateAssignment', to: 'assignments#updateAssignment', via: :post
-  resources :events
   match '/:course_id/:assignment_id/grades', to: 'grades#index', via: :get
   match '/:course_id/:assignment_id/grades/add', to: 'grades#create', via: :post
+  match '/student_info', to: 'users#student_info', via: :get
+  match '/promote_TA', to: 'users#promote_TA', via: :post
+  match '/demote_TA', to: 'users#demote_TA', via: :post
+  match '/enroll', to: 'courses#enroll', via: :post
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

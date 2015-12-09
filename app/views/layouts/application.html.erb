@@ -26,7 +26,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <% if @current_user %>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "#{@current_user.user_id}", home_path(@current_user), :id => "profile", class: "navbar-brand"%></li>
+        <li><%= link_to "#{@current_user.user_id}", home_path(@current_user), :id => "profile", class: "navbar-brand", method: :get%></li>
         <li class="dropdown">
           
           <div class="btn-group navbar-btn">

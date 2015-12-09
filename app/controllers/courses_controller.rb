@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
     end
     
     def show
+        @current_user = User.find_by_session_token(cookies[:session_token])
         id = params[:id]
         @course = Course.find(id)
         redirect_to assignments_home_path(courseId: @course.id), method: :post
@@ -17,6 +18,7 @@ class CoursesController < ApplicationController
     
     def index
         @courses = Course.all
+
         if params[:search]
             @courses = Course.search(params[:search]).order("created_at DESC")
         else
@@ -57,4 +59,12 @@ class CoursesController < ApplicationController
        flash[:notice] = "#{@course.name} was successfully updated."
        redirect_to assignments_home_path(courseId: @course.id), method: :post
     end    
+    
+    def enroll
+       @current_user = User.find_by_session_token(cookies[:session_token])
+       @current_user.courses << Course.find(params[:courseId])
+       #Course.find(params[:courseId]).users << @current_user
+       flash[:notice] = "Enrolled in #{Course.find(params[:courseId]).name}"
+       redirect_to courses_path
+    end
 end
