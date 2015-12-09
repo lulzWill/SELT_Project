@@ -11,11 +11,6 @@ class ApplicationController < ActionController::Base
     end
   end
   protected
-  
-  def set_courses
-    @courses = Course.all
-  end
-  
   def set_current_user
     @current_user ||= User.find_by_session_token(cookies[:session_token])
     redirect_to login_path unless @current_user

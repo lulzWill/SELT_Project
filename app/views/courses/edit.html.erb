@@ -1,48 +1,19 @@
-<div class="container">
-  <div class="row">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="container-fluid">
-          <%= form_tag course_path(@course), :method => :put do %>
-            <table class="table">
-              <h1>Edit Course</h1>
-              <div class="form-inline">
-                <div class="form-group">
-                  <tr>
-                    <td><%= label :course, :name, 'Name: ' %></td>
-                    <td><%= text_field :course, 'name', class: "form-control" %></td>
-                  </tr>
-                </div>
-                <div class="form-group"></div>
-                  <tr>
-                    <td><%= label :course, :course_number, 'Course Number: ' %></td>
-                    <td><%= "#{@course.course_number}"%></td>
-                  </tr>
-                </div>
-                <div class="form-group"></div>
-                  <tr>
-                    <td><%= label :course, :year_restrictions, 'Year Restrictions: ' %></td>
-                    <td><%= text_field :course, 'year_restrictions', class: "form-control" %></td>
-                  </tr>
-                </div>
-                <div class="form-group"></div>
-                  <tr>
-                    <td><%= label :course, :descrition, 'Description: ' %></td>
-                    <td><%= text_area :course, 'description', :rows => '5', :cols => '100', class: "form-control" %></td>
-                  </tr>
-                </div>
-                <div class="form-group"></div>
-                  <tr>
-                    <td><%= label :course, :semester_hours, 'Semester Hours: ' %></td>
-                    <td><%= text_field :course, 'semester_hours', class: "form-control" %></td>
-                  </tr>
-                </div>
-              </div>
-            </table>
-            <%= submit_tag 'Update Course Info', :class => 'btn btn-success'%>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<h1>Edit Course</h1>
+<%= form_tag course_path(@course), :method => :put do %>
+  <%= label :course, :name, 'Name: ' %>
+  <%= text_field :course, 'name' %>
+  <br>
+  <%= label :course, :course_number, 'Course Number: ' %>
+  <%= text_field :course, 'course_number' %>
+  <br>
+  <%= label :course, :year_restrictions, 'Year Restrictions: ' %>
+  <%= text_field :course, 'year_restrictions' %>
+  <br>
+  <%= label :course, :descrition, 'Description: ' %>
+  <%= text_field :course, 'description' %>
+  <br>
+  <%= label :course, :semester_hours, 'Semester Hours: ' %>
+  <%= text_field :course, 'semester_hours' %>
+  <br>
+  <%= submit_tag 'Update Course Info' %>
+<% end %>

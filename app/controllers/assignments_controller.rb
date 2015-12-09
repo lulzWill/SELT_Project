@@ -1,7 +1,5 @@
 class AssignmentsController < ApplicationController
     before_filter :set_current_user, :only=> ['show', 'edit', 'update', 'delete']
-    before_filter :set_courses
-    
     #when professor assignments page renders
     def assignments_home
         @current_user = User.find_by_session_token(cookies[:session_token])
@@ -35,7 +33,7 @@ class AssignmentsController < ApplicationController
     def createAssignment
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user.role == "Teacher" && $course != nil && $course != [])
-            result = Assignment.createAssignment($course.id, params[:name], params[:points], params[:file])
+            result = Assignment.createAssignment($course.id, params[:name], params[:points])
             if(result.is_a? String)
                 flash[:warning] = result
             elsif(result == false)
@@ -50,7 +48,7 @@ class AssignmentsController < ApplicationController
     def updateAssignment
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user.role == "Teacher")
-            result = Assignment.updateAssignment(params[:assignmentID].to_i, params[:name], params[:points], params[:file])
+            result = Assignment.updateAssignment(params[:assignmentID].to_i, params[:name], params[:points])
             if(result.is_a? String)
                 flash[:warning] = result
             elsif(result == false)
@@ -73,4 +71,5 @@ class AssignmentsController < ApplicationController
         end
         redirect_to assignments_home_path
     end
+
 end

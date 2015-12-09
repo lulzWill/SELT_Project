@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-    before_filter :set_current_user, :set_courses
+    before_filter :set_current_user
     
     def course_params
         params.require(:course).permit(:name, :year_restrictions, :course_number, :description, :semester_hours)    
@@ -12,7 +12,6 @@ class CoursesController < ApplicationController
     def show
         id = params[:id]
         @course = Course.find(id)
-        redirect_to assignments_home_path(courseId: @course.id), method: :post
     end
     
     def index
@@ -46,6 +45,6 @@ class CoursesController < ApplicationController
        @course = Course.find(params[:id])
        @course.update_attributes!(course_params)
        flash[:notice] = "#{@course.name} was successfully updated."
-       redirect_to assignments_home_path(courseId: @course.id), method: :post
+       redirect_to course_path(@course)
     end    
 end
