@@ -32,7 +32,7 @@
           <div class="panel-body">
               <div class="container-fluid">
                   <h3>Assignments</h3>
-                  <%if(@current_user.role == "Teacher")%>
+                  <%if(@current_user.role != "Student")%>
                       <table class="table table-striped .table-responsive" >
                           <thead>
                               <tr>
@@ -124,6 +124,77 @@
                               </div>
                             </div>
                           </div>
+                  <%else%>
+                    <table class="table table-striped .table-responsive" >
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>File</th>
+                                <th>Score</th>
+                                <th>Total</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if($assignments != nil && $assignments != []) %>
+                                <% $assignments.each do |assignment|%>
+                                    <tr class = "<%=assignment.id%>">
+                                        <td><%=assignment.name%></td>
+                                        <%# if(assignment.file_file_name != nil) %>
+                                            <!-- <td><%#= link_to "#{assignment.file_file_name}", assignment.file.url %></td> -->
+                                        <%# else %>
+                                            <td>No file added</td>
+                                        <%# end %>
+                                        <% if(assignment.grades{"#{@current_user.id}"} == nil || assignment.grades{"#{@current_user.id}"} == {}) %>
+                                            <td>--</td>
+                                            <%@grade = nil%>
+                                        <%else%>
+                                            <%@grade = assignment.grades{"#{@current_user.id}"}%>
+                                            <td><%=@grade%></td>
+                                        <%end%>
+                                        <% if(assignment.points == nil) %>
+                                            <%@total = nil%>
+                                            <td>--</td>
+                                        <%else%>
+                                            <%@total = assignment.points%>
+                                            <td><%=@total%></td>
+                                        <%end%>
+                                        <%if(@grade != nil && @total != nil) %>
+                                            <%@score = @total %>
+                                            <%if(@score >= 90)%>
+                                                <td>A
+                                            <%elsif(@score >= 80)%>
+                                                <td>B
+                                            <%elsif(@score >= 70)%>
+                                                <td>C
+                                            <%elsif(@score >= 60)%>
+                                                <td>D
+                                            <%else%>
+                                                <td>F
+                                            <%end%>
+                                            <%if(@score%10 >= 8 && @score >=60)%>
+                                                +</td>
+                                            <%elsif(@score%10 <= 2 && @score >=60)%>
+                                                -</td>
+                                            <%else%>
+                                                </td>
+                                            <%end%>
+                                        <%else%>
+                                            <td>--</td>
+                                        <%end%>
+                                    </tr>
+                                <% end %>
+                            <% else %>
+                                <tr>
+                                    <td>No Assignments</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            <% end%>
+                        </tbody>
+                    </table>
                   <%end%>
               </div>
           </div>
