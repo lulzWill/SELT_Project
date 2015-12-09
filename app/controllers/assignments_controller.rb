@@ -1,5 +1,7 @@
 class AssignmentsController < ApplicationController
     before_filter :set_current_user, :only=> ['show', 'edit', 'update', 'delete']
+    before_filter :set_courses
+    
     #when professor assignments page renders
     def assignments_home
         @current_user = User.find_by_session_token(cookies[:session_token])
@@ -21,8 +23,8 @@ class AssignmentsController < ApplicationController
             flash[:warning] = "You need to be logged in to see this page"
             $course = nil
             $assignments = nil
-        elsif(@current_user.role != "Teacher")
-            flash[:warning] = "You do not have rights for this page"
+        #elsif(@current_user.role != "Teacher")
+            #flash[:warning] = "You do not have rights for this page"
         elsif(!$course || $course == [])
             flash[:warning] = "Please select a class to see this page"
         end
@@ -33,7 +35,7 @@ class AssignmentsController < ApplicationController
     def createAssignment
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user.role == "Teacher" && $course != nil && $course != [])
-            result = Assignment.createAssignment($course.id, params[:name], params[:points])
+            result = Assignment.createAssignment($course.id, params[:name], params[:points], params[:file])
             if(result.is_a? String)
                 flash[:warning] = result
             elsif(result == false)
@@ -48,7 +50,7 @@ class AssignmentsController < ApplicationController
     def updateAssignment
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user.role == "Teacher")
-            result = Assignment.updateAssignment(params[:assignmentID].to_i, params[:name], params[:points])
+            result = Assignment.updateAssignment(params[:assignmentID].to_i, params[:name], params[:points], params[:file])
             if(result.is_a? String)
                 flash[:warning] = result
             elsif(result == false)
@@ -71,5 +73,4 @@ class AssignmentsController < ApplicationController
         end
         redirect_to assignments_home_path
     end
-
 end

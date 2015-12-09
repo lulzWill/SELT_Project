@@ -1,74 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SeltProject</title>
+  <%= stylesheet_link_tag    'assignments_home', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 <%if($course != nil && @current_user !=nil)%>
-    <div class ="container-fluid">
-        <h1><%=link_to "#{$course.name}", course_path($course.id), method: :get %></h1>
-        <h3>Assignments</h3>
-        <%if(@current_user.role == "Teacher")%>
-            <table class="table table-striped .table-responsive" >
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Total</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if($assignments != nil && $assignments != []) %>
-                        <% $assignments.each do |assignment|%>
-                            <tr class = "<%=assignment.id%>">
-                                <td><%=assignment.name%></td>
-                                <% if(assignment.points == nil) %>
-                                    <td>--</td>
-                                <%else%>
-                                    <td><%=assignment.points%></td>
-                                <%end%>
-                                <td><button type="button" id = "<%=assignment.id%>" class= "editAssign" data-toggle="modal" data-target="#myModal">Edit Assignment</button></td>
-                                <td><%= button_to 'Delete Assignment', deleteAssignment_path(:assignmentID => assignment.id), method: :post%></td>
-                                <td><%= button_to 'View Grades', "/#{$course.id}/#{assignment.id}/grades", method: :get%></td>
-                            </tr>
-                        <% end %>
-                    <% else %>
-                        <tr>
-                            <td>No Assignments</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    <% end%>
-                    <tr>
-                        <%= form_tag(createAssignment_path) do %>
-                            <td id= "createName"><%= text_field_tag(:name)%></td>
-                            <td id= "createPoints"><%= number_field_tag(:points)%></td>
-                            <td id= "createButton"><%= submit_tag("Create Assignment")%></td>
-                        <% end %>
-                            <td></td>
-                            <td></td>
-                    </tr>
-                </tbody>
-            </table>
-                <div id="myModal" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
-                
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Editing Assignment</h4>
-                      </div>
-                      <div class="modal-body">
-                        <label for="name_Name">Name</label>
-                        <input type="text" name="name" id="updateName">
-                        <label for="points_Total">Total</label>
-                        <input type="number" name="points" id="updatePoints">
-                      </div>
-                      <div class="modal-footer">
-                        <button id= "saveButton" type="button" data-dismiss="modal">Save</button>  
-                        <button type="button" data-dismiss="modal">Cancel</button>
-                      </div>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class ="container-fluid">
+                    <div class="courseinfo">
+                        <div class="leftcontainer" style="float: left">
+                            <h1><%= "#{$course.name}"%></h1>
+                            <p>Course Number: <%= "#{$course.course_number}"%></p>
+                            <p>Semester Hours: <%= "#{$course.semester_hours}"%></p>
+                            <p>Year Restrictions: <%= "#{$course.year_restrictions}"%></p>
+                            <p>Description: <%= "#{$course.description}"%></p>
+                            <%= button_to "Edit Course Info", "/courses/#{$course.course_number}/edit", :class => 'btn btn-primary',method: :get%>
+                        </div>
                     </div>
-                
-                  </div>
                 </div>
-        <%end%>
+            </div>
+        </div>
     </div>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="panel panel-default">
+          <div class="panel-body">
+              <div class="container-fluid">
+                  <h3>Assignments</h3>
+                  <%if(@current_user.role != "Student")%>
+                      <table class="table table-striped .table-responsive" >
+                          <thead>
+                              <tr>
+                                  <th>Name</th>
+                                  <th>Total</th>
+                                  <th>File</th>
+                                  <th></th>
+                                  <th></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <% if($assignments != nil && $assignments != []) %>
+                                  <% $assignments.each do |assignment|%>
+                                      <tr class = "<%=assignment.id%>">
+                                          <td><%=assignment.name%></td>
+                                          <% if(assignment.points == nil) %>
+                                              <td>--</td>
+                                          <%else%>
+                                              <td><%=assignment.points%></td>
+                                          <%end%>
+                                          <% if(assignment.file_file_name != nil) %>
+                                          <td><%= link_to "#{assignment.file_file_name}", assignment.file.url %></td>
+                                          <% else %>
+                                          <td>No file added</td>
+                                          <% end %>
+                                          <td><button type="button" id = "<%=assignment.id%>" class= "editAssign btn btn-default" data-toggle="modal" data-target="#myModal">Edit Assignment</button></td>
+                                          <td><%= button_to 'Delete Assignment', deleteAssignment_path(:assignmentID => assignment.id), :class => 'btn btn-default', method: :post%></td>
+                                          <td><%= button_to 'View Grades', "/#{$course.id}/#{assignment.id}/grades", :class => 'btn btn-default', method: :get%></td>
+                                      </tr>
+                                  <% end %>
+                              <% else %>
+                                  <tr>
+                                      <td>No Assignments</td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                  </tr>
+                              <% end%>
+                              <tr>
+                                  <%= form_tag(createAssignment_path, multipart: true) do %>
+                                    <div class="form-inline">
+                                      <div class="form-group">
+                                        <td id= "createName"><%= text_field_tag :name, "", class: "form-control"%></td>
+                                      </div>
+                                      <div class="form-group">
+                                        <td id= "createPoints"><%= number_field_tag :points, "", class: "form-control"%></td>
+                                      </div>
+                                      <div class="form-group">
+                                        <td id= "createFile">
+                                            <span class="btn btn-large btn-default btn-file">
+                                                Choose File
+                                                <%= file_field_tag :file %>
+                                            </span>
+                                        </td>
+                                      </div>
+                                      <div class="form-group">
+                                        <td id= "createButton"><%= submit_tag("Create Assignment", class: 'btn btn-success', 'data-disable-with' => "Adding Assignment")%></td>
+                                      </div>
+                                  <% end %>
+                                      <td></td>
+                                      <td></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                          <div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">Editing Assignment</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="form-inline">
+                                    <div class="form-group">
+                                      <label for="name_Name">Name: </label>
+                                      <input type="text" name="name" id="updateName" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="points_Total">Total: </label>
+                                      <input type="number" name="points" id="updatePoints" class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button id= "saveButton" type="button" data-dismiss="modal" class="btn btn-success">Save</button>  
+                                  <button type="button" data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                  <%else%>
+                    <table class="table table-striped .table-responsive" >
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>File</th>
+                                <th>Score</th>
+                                <th>Total</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if($assignments != nil && $assignments != []) %>
+                                <% $assignments.each do |assignment|%>
+                                    <tr class = "<%=assignment.id%>">
+                                        <td><%=assignment.name%></td>
+                                        <%# if(assignment.file_file_name != nil) %>
+                                            <!-- <td><%#= link_to "#{assignment.file_file_name}", assignment.file.url %></td> -->
+                                        <%# else %>
+                                            <td>No file added</td>
+                                        <%# end %>
+                                        <% if(assignment.grades{"#{@current_user.id}"} == nil || assignment.grades{"#{@current_user.id}"} == {}) %>
+                                            <td>--</td>
+                                            <%@grade = nil%>
+                                        <%else%>
+                                            <%@grade = assignment.grades{"#{@current_user.id}"}%>
+                                            <td><%=@grade%></td>
+                                        <%end%>
+                                        <% if(assignment.points == nil) %>
+                                            <%@total = nil%>
+                                            <td>--</td>
+                                        <%else%>
+                                            <%@total = assignment.points%>
+                                            <td><%=@total%></td>
+                                        <%end%>
+                                        <%if(@grade != nil && @total != nil) %>
+                                            <%@score = @total %>
+                                            <%if(@score >= 90)%>
+                                                <td>A
+                                            <%elsif(@score >= 80)%>
+                                                <td>B
+                                            <%elsif(@score >= 70)%>
+                                                <td>C
+                                            <%elsif(@score >= 60)%>
+                                                <td>D
+                                            <%else%>
+                                                <td>F
+                                            <%end%>
+                                            <%if(@score%10 >= 8 && @score >=60)%>
+                                                +</td>
+                                            <%elsif(@score%10 <= 2 && @score >=60)%>
+                                                -</td>
+                                            <%else%>
+                                                </td>
+                                            <%end%>
+                                        <%else%>
+                                            <td>--</td>
+                                        <%end%>
+                                    </tr>
+                                <% end %>
+                            <% else %>
+                                <tr>
+                                    <td>No Assignments</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            <% end%>
+                        </tbody>
+                    </table>
+                  <%end%>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
 <%end%>
