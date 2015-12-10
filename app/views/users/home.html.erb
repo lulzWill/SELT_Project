@@ -49,6 +49,13 @@
             </div>
           <% end %>
           </div>
+<<<<<<< HEAD
+=======
+          <% if @current_user.role != "Admin" %>
+          <%= link_to "Enroll in a Course", courses_path%>
+          <br>
+          <% end %>
+>>>>>>> adminStuff
         </div>
       </div>
     </div>

@@ -1,6 +1,16 @@
-<h1>Professors</h1>
-
-<% for professor in @professors%>
-<% link_to "#{professor.name}", user_path(professor)%>
-<br>
-<% end %>
+<div class = "container">
+    <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="container-fluid">
+                <h1>Teachers</h1>
+                
+                <% for user in @users%>
+                <%= button_to "#{user.user_id}", user_path(user), method: :get%>
+                <br>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
