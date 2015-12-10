@@ -55,7 +55,7 @@
           <div class="panel-body">
               <div class="container-fluid">
                   <h3>Assignments</h3>
-                  <%if(@current_user.role != "Student")%>
+                  <%if(@current_user.role != "Student" || @current_user.ta)%>
                       <table class="table table-striped .table-responsive" >
                           <thead>
                               <tr>

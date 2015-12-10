@@ -1,4 +1,4 @@
-<h1>Student Information</h1>
+<h1>Account Information</h1>
 
 <p>Name:  <%=@student.name%></p>
 <br>
@@ -8,8 +8,14 @@
 <br>
 <p>Year: <%=@student.year%></p>
 <br>
-<%if @student.ta != true%>
-<%= button_to 'Promote to TA', promote_TA_path(userId: @student.user_id), method: :post %>
-<% else %>
-<%= button_to 'Demote from TA', demote_TA_path(userId: @student.user_id), method: :post %>
+<%if @student.role == "Student" %>
+    <%if @student.ta != true%>
+    <%= button_to 'Promote to TA', promote_TA_path(userId: @student.user_id), method: :post %>
+    <br>
+    <% else %>
+    <%= button_to 'Demote from TA', demote_TA_path(userId: @student.user_id), method: :post %>
+    <br>
+    <% end %>
 <% end %>
+
+<%= button_to 'Delete Account', user_path(@student), :method => :delete %>
