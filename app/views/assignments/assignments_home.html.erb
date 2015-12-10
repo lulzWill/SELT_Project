@@ -3,6 +3,7 @@
 <head>
   <title>SeltProject</title>
   <%= stylesheet_link_tag    'assignments_home', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'assignments' %> 
   <%= csrf_meta_tags %>
 </head>
 <%if($course != nil && @current_user !=nil)%>

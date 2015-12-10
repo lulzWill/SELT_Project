@@ -55,8 +55,8 @@ RSpec.describe GradesController, type: :controller do
             expect(@x).to receive(:update_attributes).and_return(true)
             @x.update_attributes({:grade => {:grades => {"user" => "10"}}})
             post :create, {:grade => {:user_id => "admin", :points => "10"}}
-            expect(flash[:notice]).to eq "successfully added grade for admin!"
-            expect(response).to redirect_to(home_path)
+            expect(flash[:notice]).to eq "successfully added grades!"
+            expect(response).to redirect_to("///grades")
             #expect(response).to redirect_to("/#{@fakec.id}/#{@fakea.id}/grades")
         end
     end
