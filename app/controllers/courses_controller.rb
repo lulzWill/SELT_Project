@@ -46,11 +46,7 @@ class CoursesController < ApplicationController
     end
     
     def edit
-        if(@current_user.role == 'admin')
-            @course = Course.find(params[:id])
-        else
-           flash[:warning] = "Only admins can do this!" 
-        end    
+        @course = Course.find(params[:id])
     end
     
     def update
@@ -64,6 +60,6 @@ class CoursesController < ApplicationController
        course = Course.find(params[:courseId])
        @current_user.courses << course
        flash[:notice] = "Enrolled in #{Course.find(params[:courseId]).name}"
-       redirect_to home_path
+       redirect_to courses_path
     end
 end

@@ -34,9 +34,11 @@
               Courses<span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <% @courses.each do |course| %>
+              <% @current_user.courses.each do |course| %>
                 <li><%= link_to "#{course.name}", assignments_home_path(courseId: course.id), method: :post %></li>
               <% end %>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "View All Courses", courses_path %></li>
             </ul>
           </div>
           

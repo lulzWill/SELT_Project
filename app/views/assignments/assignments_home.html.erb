@@ -40,8 +40,16 @@
                               <%= link_to 'Delete Course', course_path($course), :method => :delete  %>
                             <%end%>
                             
-                            <%= link_to 'Back to Course List',  courses_path %>
-                            <%= button_to 'Enroll in this Course', enroll_path(courseId: $course.id), method: :post%>
+                            <%# link_to 'Back to Course List',  courses_path %>
+                            <% @check = false %>
+                            <% @current_user.courses.each do |usercourses| %>
+                              <% if(usercourses.name === $course.name)%>
+                                <% @check = true %>
+                              <% end %>
+                            <% end %>
+                            <% if(@check === false)%>
+                              <%= button_to 'Enroll in this Course', enroll_path(courseId: $course.id), :class => 'btn btn-primary', method: :post%>
+                            <% end %>
                         </div>
                     </div>
                 </div>
