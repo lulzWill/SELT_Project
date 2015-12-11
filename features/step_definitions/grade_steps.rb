@@ -1,6 +1,6 @@
 Given /"(.*?)" is on the "(.*?)" grades page for "(.*?)"/ do |user, assignment, course|
   #ask ryan about index pathing
-  aid = Assignment.find_by_name(assignment).id
+  aid = Assignment.find_by_title(assignment).id
   cid = Course.find_by_course_number(course).id
   visit "/#{cid}/#{aid}/grades"
 end
@@ -20,7 +20,7 @@ Given /User "(.*?)" has been added to "(.*?)"/ do |user, course|
 end
 
 Given /Assignment "(.*?)" has been added to "(.*?)"/ do |assignment, course|
-    a = Assignment.find_by_name(assignment)
+    a = Assignment.find_by_title(assignment)
     c =  Course.find_by_course_number(course)
     c.assignments << a
 end
@@ -48,13 +48,13 @@ Then /I should be redirected to the assignment page with a "(.*?)" message/ do |
 end
 
 When /I add a grade with "(.*?)" points for "(.*?)"/ do |points, user|
-    fill_in 'grade[' + user + ']', :with => points
+    fill_in 'val_' + user, :with => points, :match => :prefer_exact
     click_button 'Add Grades'
 end
 
 When /I add multiple grades with "(.*?)" points for "(.*?)" and "(.*?)" points for "(.*?)"/ do |points1, user1, points2, user2|
-    fill_in 'grade[' + user1 + ']', :with => points1
-    fill_in 'grade[' + user2 + ']', :with => points2
+    fill_in 'val_' + user1, :with => points1, :match => :prefer_exact
+    fill_in 'val_' + user2, :with => points2, :match => :prefer_exact
     click_button 'Add Grades'
 end
 

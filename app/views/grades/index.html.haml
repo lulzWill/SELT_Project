@@ -43,7 +43,7 @@
                     - @userlist.each do |user|
                       %tr
                         %td= label :grade, :user_id, user[:id]
-                        %td= number_field :grade, user[:id], :id => 'points', :value => user[:points], :step => "any"
+                        %td= number_field :grade, user[:id], :id => 'points', :value => user[:points], :step => "any", :id => "val_" + user[:id]
                 = submit_tag 'Add Grades', :class => 'btn btn-success'
           %div.col-sm-6
             %button#show_form.btn.btn-default.btn-md.pull-right

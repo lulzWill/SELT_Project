@@ -12,7 +12,7 @@ Background: courses have been added to the application
   | Intro to Software Engineering | none              | SE:101        |
   
   Given the following assignments have been added to the database:
-  | name                          | points            | 
+  | title                         | points            | 
   | Homework 1                    | 10                |
 
   And  User "user1" has been added to "SE:101"
@@ -31,5 +31,5 @@ Scenario: Adding multiple grades for an assignment
   Then I should be redirected to the assignment page with a "success" message
   
 Scenario: Seeing the average grade for all assignments
-  When I add multiple grades with "5" points for "user1" and "5" points for "user3"
-  Then I should be able to see the average score of "50" on the "Homework 1" page
+  When I add multiple grades with "0" points for "user1" and "0" points for "user3"
+  Then I should be able to see the average score of "0" on the "Homework 1" page
