@@ -27,7 +27,6 @@
         0,
         0,
         0,
-        0,
         null,
         null,
         null,
@@ -53,6 +52,9 @@
         null,
         null,
         null,
+        1,
+        0,
+        null,
         null,
         1,
         0,
@@ -66,18 +68,6 @@
         null,
         1,
         0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         0,
         0,
@@ -90,6 +80,9 @@
         1,
         0,
         0,
+        0,
+        0,
+        null,
         0,
         null,
         0,
@@ -205,17 +198,10 @@
         null,
         null,
         6,
-<<<<<<< HEAD
-        0,
-        0,
-        0,
-        6,
-=======
         1,
         1,
         1,
         5,
->>>>>>> cucumberForAssign
         1,
         null,
         null,
@@ -241,11 +227,6 @@
         2,
         2,
         2,
-<<<<<<< HEAD
-        0,
-        0,
-=======
->>>>>>> cucumberForAssign
         null,
         null,
         2,
@@ -360,7 +341,6 @@
         1,
         1,
         1,
-        null,
         1,
         null,
         0,
@@ -440,10 +420,6 @@
         null,
         null,
         null,
-        1,
-        1,
-        0,
-        null,
         null
       ],
       "/home/ubuntu/workspace/SELT_Project/app/models/course.rb": [
@@ -492,28 +468,8 @@
         null,
         2,
         1,
-<<<<<<< HEAD
-        2,
-        2,
-=======
->>>>>>> cucumberForAssign
         null,
         null,
-<<<<<<< HEAD
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        4,
-        1,
-        null,
-        3,
-        null,
-=======
         null,
         null,
         1,
@@ -521,7 +477,6 @@
         1,
         1,
         1,
->>>>>>> cucumberForAssign
         null,
         null,
         1,
@@ -580,10 +535,6 @@
         null
       ]
     },
-<<<<<<< HEAD
-    "timestamp": 1449797083
-=======
-    "timestamp": 1449798162
->>>>>>> cucumberForAssign
+    "timestamp": 1449798867
   }
 }
