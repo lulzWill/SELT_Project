@@ -26,7 +26,7 @@
                                   <% @courses.each do |course| %>
                                       <tr class = "<%=course.id%>">
                                           <td><%=course.course_number%></td>
-                                          <td><%= link_to "#{course.name}", course_path(course.id) %></td>
+                                          <td><%= link_to "#{course.name}", course_path(course.id), method: :get %></td>
                                           <td><%=course.semester_hours %></td>
                                           <td><%=course.year_restrictions %></td>
                                           <td>
