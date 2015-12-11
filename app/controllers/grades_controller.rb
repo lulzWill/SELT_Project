@@ -17,11 +17,9 @@ class GradesController < ApplicationController
             end
 
             attributes_to_update = {:grades => assignment.grades.merge(grade_hash)}
-            if assignment.update_attributes!(attributes_to_update)
-                flash[:notice] = "successfully added grades!"
-            else
-                flash[:notice] = "Unable to add grades!"
-            end
+            assignment.update_attributes!(attributes_to_update)
+            flash[:notice] = "successfully added grades!"
+            
             redirect_to "/#{params[:course_id]}/#{params[:assignment_id]}/grades"
         else
             flash[:notice] = "Assignment does not exist!"

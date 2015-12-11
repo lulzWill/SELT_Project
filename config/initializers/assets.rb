@@ -7,6 +7,7 @@ Rails.application.config.assets.precompile += %w( assignments_home.css )
 Rails.application.config.assets.precompile += %w( courses.js )
 Rails.application.config.assets.precompile += %w( grades_scripts.js )
 Rails.application.config.assets.precompile += %w( assignments.js )
+Rails.application.config.assets.precompile += %w( course_scripts.js )
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
