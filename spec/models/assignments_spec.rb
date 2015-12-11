@@ -41,34 +41,54 @@ describe 'Assignment' do
         it "should return 0 if the points were invalid" do
            expect(Assignment.validPoints('') == 0).to be true
         end   
+        it "should return 0 if the points were nil" do
+           expect(Assignment.validPoints(nil) == 0).to be true
+        end   
+    end
+    describe 'validDueDate' do
+        it "should return false if the date was nil" do
+           expect(Assignment.validDueDate(nil)).to be false
+        end
+        it "should return true if the date was valid" do
+           expect(Assignment.validDueDate("2015-12-23 00:00:00 UTC")).to be true
+        end
     end
     describe 'createAssignment' do
         it "should create a new assignment if the params are valid" do
-           Assignment.createAssignment(1,"newAssignment", 5)
+           expect(Assignment.createAssignment(@fakeCourse.id,"newAssignment", 5, nil,"2015-12-23 00:00:00 UTC").id).to_not be_nil
            expect(Assignment.where("name = ?", "newAssignment")).to_not be_nil
+           
         end
         it "should not create a new assignment if the id is invalid" do
-           Assignment.createAssignment(50,"newAssignment2", 5)
+           Assignment.createAssignment(50,"newAssignment2", 5 ,nil ,"2015-12-23 00:00:00 UTC")
            expect(Assignment.where("name = ?", "newAssignment2").empty?).to be true
         end 
         it "should not create a new assignment if the name is invalid" do
-           Assignment.createAssignment(1,"", 5)
+           Assignment.createAssignment(@fakeCourse.id,"", 5, nil, "2015-12-23 00:00:00 UTC")
            expect(Assignment.where("name = ?", "").empty?).to be true
+        end 
+        it "should create a new assignment if the points are nil and everything is valid" do
+           a = Assignment.createAssignment(@fakeCourse.id,"newAssignment3", nil, nil, "2015-12-23 00:00:00 UTC")
+           expect(Assignment.find(a.id)).to_not be_nil
+        end 
+        it "should not create a new assignment if the date is nil"  do
+           Assignment.createAssignment(@fakeCourse.id,"newAssignment4", nil, nil, nil)
+           expect(Assignment.where("name = ?", "newAssignment4").empty?).to be true
         end 
     end
     describe 'updateAssignment' do
         it "should update an assignment if the params are valid" do
-           Assignment.createAssignment(1,"new Name", 5)
-           expect(Assignment.where("name = ?", "newAssignment")).to_not be_nil
+           expect(Assignment.updateAssignment(@fakeAssignment.id,"new Name", 5)).to be true
         end
-        it "should not update an assignment if the assignment is not valid" do
-           Assignment.createAssignment(50,"newAssignment3", 5)
-           expect(Assignment.where("name = ?", "newAssignment3").empty?).to be true
+        it "should not update an assignment if the assignment id is not valid" do
+           expect(Assignment.updateAssignment(50,"newAssignment5", 5)).to eq("Unable to update assignment")
         end 
         it "should not update an assignment if the name is not valid" do
-           Assignment.createAssignment(1,"", 5)
-           expect(Assignment.where("name = ?", "").empty?).to be true           
+           expect(Assignment.updateAssignment(@fakeAssignment.id,"", 5)).to eq("Unable to update assignment. The name entered was not valid")
         end 
+        #it "should not update an assignment if the date is nil" do
+        #   expect(Assignment.updateAssignment(@fakeAssignment.id,"", 5, "2015-12-23 00:00:00 UTC")).to be "Unable to create assignment. The dueDate was not valid"
+        #end 
     end
    
 end

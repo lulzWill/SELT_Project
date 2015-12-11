@@ -3,7 +3,7 @@ require 'spec_helper'
 require 'assignments_controller'
 
 describe AssignmentsController do
-    before(:all) do
+    before(:each) do
         @fakeCourse = FactoryGirl.create(:course)
         @fakeTeacher = FactoryGirl.create(:user, user_id:'teacher', email:'teacher@teacher.com',password:'teacher',password_confirmation:'teacher',role: 'Teacher')
         @fakeStudent = FactoryGirl.create(:user, user_id:'student', email:'student@student.com',password:'student',password_confirmation:'student',role: 'Student')
@@ -15,19 +15,13 @@ describe AssignmentsController do
                 cookies.permanent[:session_token] = nil
             end
             it 'flashes "You need to be logged in to see this page" when someone is not logged in' do
+                expect(User).to receive(:find_by_session_token).and_return nil
                 post :assignments_home, {:courseId => @fakeCourse.id}
-                expect(flash[:warning]).to eq "You need to be logged in to see this page" 
+                expect($course).to be_nil
+                expect($assignments).to be_nil
+                expect(flash[:warning]).to eq("You need to be logged in to see this page") 
             end
         end
-       #describe 'Logged in as student' do
-        #    before(:each) do
-         #       cookies.permanent[:session_token] = @fakeStudent.session_token
-          #  end
-           # it 'flashes "You do not have rights for this page" when not a teacher' do
-            #    post :assignments_home, {:courseId => @fakeCourse.id}
-             #   expect(flash[:warning]).to eq "You do not have rights for this page"
-            #end
-        #end
         describe 'Logged in as a teacher' do
             describe 'class not specified' do
                 before(:each) do
@@ -112,6 +106,17 @@ describe AssignmentsController do
             end
         end
     end
-
+    
+    describe 'index' do
+        before(:each) do
+            cookies.permanent[:session_token] = @fakeTeacher.session_token
+        end
+        it "should do set variables" do
+            expect(User).to receive(:find_by_session_token).and_return @fakeTeacher
+            expect(@fakeTeacher).to receive(:assignments).and_return "got it"
+            get :index, :format => [:html]
+            expect(assigns(:events)).to eq "got it"
+        end
+    end
     
 end
