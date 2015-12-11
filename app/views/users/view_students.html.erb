@@ -1,7 +1,17 @@
-<h1>Students</h1>
-<% if @store != nil %>
-    <% for user in @store%>
-    <%= link_to "#{user.user_id}", user_path(user)%>
-    <br>
-    <% end %>
-<% end %>
+<div class = "container">
+    <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="container-fluid">
+        <h1>Students</h1>
+        <% if @store != nil %>
+            <% for user in @store%>
+            <%= button_to "#{user.user_id}", user_path(user), method: :get%>
+            <br>
+            <% end %>
+        <% end %>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>

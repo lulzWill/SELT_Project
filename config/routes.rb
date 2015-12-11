@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   match '/logout', to: 'sessions#destroy', via: :delete
   match '/home', to: 'users#home', via: :get
   match '/admin_home', to: 'users#admin_home', via: :get
+  match '/admin_view_professors', to: 'users#admin_view_professors', via: :get
   match '/view_students', to: 'users#view_students', via: :get
   match '/assignments_home', to: 'assignments#assignments_home', via: :get
   match '/assignments_home', to: 'assignments#assignments_home', via: :post

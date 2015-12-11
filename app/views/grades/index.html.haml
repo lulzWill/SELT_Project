@@ -1,7 +1,7 @@
 = javascript_include_tag 'grades_scripts'
 = javascript_include_tag "//www.google.com/jsapi", "chartkick"
 %div.container
-  - if @current_user.role == "Teacher"
+  - if @current_user.role == "Teacher" || @current_user.ta
     %div.row
       %div.panel.panel-default
         %div.panel-body{:style => 'height: 40%;'}
