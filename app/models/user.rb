@@ -10,8 +10,4 @@ class User < ActiveRecord::Base
     #   hsh[:session_token] = SecureRandom.base64
     #   User.create!(hsh)
     #end
-    private
-    def create_session_token
-       self.session_token = SecureRandom.urlsafe_base64 
-    end
 end

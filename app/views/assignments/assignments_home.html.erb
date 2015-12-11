@@ -113,13 +113,13 @@
                                   <%= form_tag(createAssignment_path, multipart: true) do %>
                                     <div class="form-inline">
                                       <div class="form-group">
-                                        <td id= "createName"><%= text_field_tag :title, "", class: "form-control"%></td>
+                                        <td id= "createName"><%= text_field_tag(:title, nil, :required => true, class: "form-control") %></td>
                                       </div>
                                       <div class="form-group">
                                         <td id= "createPoints"><%= number_field_tag :points, "", class: "form-control"%></td>
                                       </div>
                                       <div class="form-group">
-                                        <td id= "createDate"><%= date_field_tag(:dueDate)%></td>
+                                        <td id= "createDate"><%= date_field_tag(:dueDate, nil, :required => true)%></td>
                                       </div>
                                       <div class="form-group">
                                         <td id= "createFile">

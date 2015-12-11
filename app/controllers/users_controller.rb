@@ -76,7 +76,7 @@ class UsersController < ApplicationController
                redirect_to admin_home_path
             end
             @courses = @current_user.courses
-       else
+        else
             redirect_to new_user_path
         end
     end

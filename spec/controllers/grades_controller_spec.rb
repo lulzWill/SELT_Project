@@ -23,7 +23,25 @@ RSpec.describe GradesController, type: :controller do
             @fakea = FactoryGirl.create(:assignment)
             @fakec = FactoryGirl.create(:course)
             expect(Assignment).to receive(:find).and_return(@fakea).twice
+            
             expect(Course).to receive(:find).and_return(@fakec)
+            gradesArray={"user0"=>"0","user1"=>"1","user2"=>"2","user3"=>"3","user4"=>"4","user5"=>"5","user6"=>"6","user7"=>"7","user8"=>"8","user9"=>"9","user10"=>"10"}
+            expect(@fakea).to receive(:points).and_return(10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10)
+            expect(@fakea).to receive(:grades).and_return(gradesArray)
+            user = Array.new
+            user << @current_user
+            expect(@fakec).to receive(:users).and_return(user)
+            get :index
+            expect(response).to render_template('index')
+        end
+        it 'checks data displayed correctly' do
+            @fakea = FactoryGirl.create(:assignment)
+            @fakec = FactoryGirl.create(:course)
+            expect(Assignment).to receive(:find).and_return(@fakea).twice
+            
+            expect(Course).to receive(:find).and_return(@fakec)
+            gradesArray={}
+            expect(@fakea).to receive(:grades).and_return(gradesArray)
             get :index
             expect(response).to render_template('index')
         end
@@ -34,12 +52,6 @@ RSpec.describe GradesController, type: :controller do
             cookies.permanent[:session_token] = @current_user.session_token
             User.find_by_session_token(cookies[:session_token])
         end
-        it 'redirect if assignment does not exist' do
-            expect(Assignment).to receive(:find).and_return(false)
-            post :create, {:grade => {:grades => {"user" => "10"}}}
-            expect(response).to redirect_to(home_path)
-            expect(flash[:notice]).to eq("Assignment does not exist!")
-        end    
     end
     describe 'create grades successfully' do
         before :each do
@@ -52,12 +64,11 @@ RSpec.describe GradesController, type: :controller do
             @fakec = FactoryGirl.create(:course)
             expect(Assignment).to receive(:find).and_return(@fakea).at_least(:once)
             assignment = Assignment.find(@fakea.id)
-            expect(@x).to receive(:update_attributes).and_return(true)
-            @x.update_attributes({:grade => {:grades => {"user" => "10"}}})
+            expect(assignment).to receive(:update_attributes).and_return(true)
+            assignment.update_attributes({:grade => {:grades => {"user" => "10"}}})
             post :create, {:grade => {:user_id => "admin", :points => "10"}}
             expect(flash[:notice]).to eq "successfully added grades!"
             expect(response).to redirect_to("///grades")
-            #expect(response).to redirect_to("/#{@fakec.id}/#{@fakea.id}/grades")
         end
     end
 end
