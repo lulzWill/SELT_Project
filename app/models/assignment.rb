@@ -12,10 +12,11 @@ class Assignment < ActiveRecord::Base
         if(!self.validName(title))
             return "Unable to create assignment. The name entered was not valid"
         end
+
         points = self.validPoints(points)
-        #if(!self.validDueDate(dueDate))
-         #   return "Unable to create assignment. The due date is past"
-        #end
+        if(!self.validDueDate(dueDate))
+            return "Unable to create assignment. The Due Date was not valid"
+        end
         
         return self.create!(course_id: courseID, title: title, points: points, start_at: dueDate, end_at: dueDate, file: file)
     end
@@ -27,6 +28,9 @@ class Assignment < ActiveRecord::Base
         if(!self.validName(name))
             return "Unable to update assignment. The name entered was not valid"
         end
+        #if(!self.validDueDate(dueDate))
+        #    return "Unable to create assignment. The dueDate was not valid"
+        #end
         points = self.validPoints(points)
         assignment = self.find(assignmentID)
         assignment.title = name
@@ -75,8 +79,10 @@ class Assignment < ActiveRecord::Base
     end
     
     def self.validDueDate(dueDate)
-       if(dueDate.past?) 
+       if(dueDate == nil)
+           return false
        end
+       return true
     end
     
     def self.numeric?(string)

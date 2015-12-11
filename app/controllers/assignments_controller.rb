@@ -19,7 +19,7 @@ class AssignmentsController < ApplicationController
             $assignments = nil
         end#$course = Course.find(1)
         
-        if(!@current_user)
+        if(!@current_user || @current_user == nil)
             flash[:warning] = "You need to be logged in to see this page"
             $course = nil
             $assignments = nil
@@ -36,8 +36,6 @@ class AssignmentsController < ApplicationController
             result = Assignment.createAssignment($course.id, params[:title], params[:points], params[:file], params[:dueDate])
             if(result.is_a? String)
                 flash[:warning] = result
-            elsif(result == false)
-                flash[:warning] = "Unable to create assignment"
             end
         else($course == nil && $course == [])
             flash[:warning] = "Unable to create assignment"
@@ -51,8 +49,6 @@ class AssignmentsController < ApplicationController
             result = Assignment.updateAssignment(params[:assignmentID].to_i, params[:name], params[:points])
             if(result.is_a? String)
                 flash[:warning] = result
-            elsif(result == false)
-                flash[:warning] = "Unable to update assignment"
             end
         end
         redirect_to assignments_home_path
