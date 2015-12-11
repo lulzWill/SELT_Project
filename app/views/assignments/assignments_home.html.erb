@@ -110,6 +110,10 @@
                                   </tr>
                               <% end%>
                               <tr>
+                                 <% @check = false %>
+                                  <% @current_user.courses.each do |usercourses| %>
+                                    <% if(usercourses.name === $course.name)%>
+                                      <% @check = true %>
                                   <%= form_tag(createAssignment_path, multipart: true) do %>
                                     <div class="form-inline">
                                       <div class="form-group">
@@ -134,6 +138,8 @@
                                       </div>
                                     </div>
                                   <% end %>
+                                <% end %>
+                              <% end %>
                                       <td></td>
                                       <td></td>
                               </tr>
