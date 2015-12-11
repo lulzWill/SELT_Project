@@ -83,7 +83,7 @@ class UsersController < ApplicationController
         @current_user = User.find_by_session_token(cookies[:session_token])
         if(@current_user)
             @courses = @current_user.courses
-       else
+        else
             redirect_to new_user_path
         end
     end
