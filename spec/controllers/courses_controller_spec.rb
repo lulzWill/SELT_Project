@@ -101,7 +101,7 @@ describe CoursesController do
     describe 'edit' do
         it 'course edit' do
             @course = FactoryGirl.create(:course)
-            get :edit, id: @course.id
+            get :edit, {:id => @course.id}
         end    
     end
     
@@ -121,4 +121,5 @@ describe CoursesController do
             expect(response).to redirect_to courses_path
         end   
     end    
+    
 end    

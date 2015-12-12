@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     def show
          @student = User.find(params[:id])
 		if !current_user?(params[:id]) && @current_user.role == "Student"
-		    flash[:warning]='Can only show profile of logged-in	user'	
+		    flash[:warning]="Can only show profile of logged-in	user"
 		end	
     end
     
