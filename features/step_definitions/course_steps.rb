@@ -7,11 +7,11 @@
 
 When /^I have added a course with name "(.*?)" and year_restrictions "(.*?)" and course_number "(.*?)" and description "(.*?)"$/ do |name, year_restrictions, course_number, description|
     visit new_course_path
-    fill_in 'name', :with => name
-    fill_in 'year_restrictions', :with => year_restrictions
-    fill_in 'course_number', :with => course_number
-    fill_in 'description', :with => description
-    click_button 'save_course'
+    fill_in 'course_name', :with => name
+    fill_in 'course_year_restrictions', :with => year_restrictions
+    fill_in 'course_course_number', :with => course_number
+    fill_in 'course_description', :with => description
+    click_button 'Save Course'
 end
 
 Then /^I should see a course list entry with name "(.*?)" and course_number "(.*?)"$/ do |name, course_number|
