@@ -178,4 +178,14 @@ describe UsersController do
         get :new
       end
   end
+  
+  describe 'destroy' do
+    it 'deletes a user' do
+           @user = FactoryGirl.create(:user)
+           post :destroy, {:id => @user.id}
+           expect(User.exists?(@user.id)).to be false
+           expect(flash[:notice]).to eq "User was successfully deleted."
+           expect(response).to redirect_to admin_home_path
+        end
+  end
 end
