@@ -95,5 +95,11 @@ class UsersController < ApplicationController
         redirect_to view_students_path
     end
     
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
+        flash[:notice] = "User was successfully deleted."
+        redirect_to admin_home_path
+    end
     
 end
