@@ -21,12 +21,16 @@ Then /^I should be redirected to signup path$/ do
 end
 
 When /^I have not logged in$/ do
-    visit new_user_path
-    click_link 'SELT_Project'
+    visit login_path
+    fill_in 'user_id', :with => 'student'
+    fill_in 'password', :with => 'student'
+    click_button 'Log in'
+    click_button 'Log Out'
+    click_link 'ISS'
 end
 
 Then /^redirect to new_user_path$/ do
-    expect(current_url).to match(new_user_path)
+    expect(current_url).to match(home_path)
 end
 
 When /^I am logged in$/ do 
@@ -34,7 +38,7 @@ When /^I am logged in$/ do
   fill_in 'user_id', :with => 'student'
   fill_in 'password', :with => 'student'
   click_button 'Log in'
-  click_link 'SELT_Project'
+  click_link 'ISS'
 end
 
 Then /^redirect to home_path$/ do
